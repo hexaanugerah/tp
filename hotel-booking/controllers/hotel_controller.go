@@ -35,6 +35,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 func HotelDetail(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.URL.Query().Get("id"))
+	selectedType := r.URL.Query().Get("type")
 	database.AppDB.RLock()
 	defer database.AppDB.RUnlock()
 
@@ -100,14 +101,36 @@ func HotelDetail(w http.ResponseWriter, r *http.Request) {
 	var groups []RoomTypeGroup
 	for _, roomType := range []string{"Biasa", "Deluxe", "VIP"} {
 		rooms := roomsByType[roomType]
+		if len(rooms) == 0 {
+			continue
+		}
 		sort.Slice(rooms, func(i, j int) bool { return rooms[i].ID < rooms[j].ID })
 		groups = append(groups, RoomTypeGroup{Type: roomType, Rooms: rooms})
 	}
 
+	if selectedType == "" && len(groups) > 0 {
+		selectedType = groups[0].Type
+	}
+
+	var activeGroup RoomTypeGroup
+	for _, group := range groups {
+		if group.Type == selectedType {
+			activeGroup = group
+			break
+		}
+	}
+
+	if activeGroup.Type == "" && len(groups) > 0 {
+		activeGroup = groups[0]
+		selectedType = groups[0].Type
+	}
+
 	render(w, "hotel_detail.html", ViewData{
-		"Request":     r,
-		"Hotel":       selected,
-		"RoomOptions": options,
-		"RoomGroups":  groups,
+		"Request":      r,
+		"Hotel":        selected,
+		"RoomOptions":  options,
+		"RoomGroups":   groups,
+		"ActiveGroup":  activeGroup,
+		"SelectedType": selectedType,
 	})
 }

@@ -44,21 +44,27 @@
       {{range .Facilities}}<li>✅ {{.}}</li>{{end}}
     </ul>
 
-    <a class="btn room-btn" href="/booking?hotel_id={{.HotelID}}&room_id={{.RoomID}}">Pilih {{.Type}}</a>
+    <a class="btn room-btn" href="/hotel?id={{$.Hotel.ID}}&type={{.Type}}#tipe-kamar">Pilih Tipe {{.Type}}</a>
   </article>
   {{end}}
 </section>
 
-<section class="section-head room-head detail-list-head">
-  <h3>Daftar Lengkap Kamar (10 Kamar per Tipe)</h3>
-  <p>Semua kamar bisa dipilih langsung sesuai tipe favoritmu.</p>
+<section id="tipe-kamar" class="section-head room-head detail-list-head">
+  <h3>Pilih Kamar Berdasarkan Tipe</h3>
+  <p>Pilih dulu tipe kamar, lalu lihat daftar 10 kamar khusus tipe itu.</p>
 </section>
 
-{{range .RoomGroups}}
+<section class="type-filter">
+  {{range .RoomGroups}}
+  <a class="type-pill {{if eq $.SelectedType .Type}}active{{end}}" href="/hotel?id={{$.Hotel.ID}}&type={{.Type}}#tipe-kamar">{{.Type}} ({{len .Rooms}})</a>
+  {{end}}
+</section>
+
+{{if .ActiveGroup.Type}}
 <section class="room-type-section">
-  <div class="room-type-title">Tipe {{.Type}} ({{len .Rooms}} Kamar)</div>
+  <div class="room-type-title">Tipe {{.ActiveGroup.Type}} ({{len .ActiveGroup.Rooms}} Kamar)</div>
   <div class="room-list-grid">
-    {{range .Rooms}}
+    {{range .ActiveGroup.Rooms}}
     <article class="room-item-card">
       <img src="{{.ImageURL}}" alt="{{.Name}}" class="room-item-image"/>
       <div class="room-item-body">

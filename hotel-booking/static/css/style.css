@@ -94,6 +94,11 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circ
 }
 
 .detail-list-head{margin-top:22px}
+
+.type-filter{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 14px}
+.type-pill{display:inline-flex;align-items:center;padding:9px 14px;border-radius:999px;background:#e7eefb;color:#114a80;text-decoration:none;font-weight:700;border:1px solid #cfe0f7}
+.type-pill:hover{background:#dcecff}
+.type-pill.active{background:linear-gradient(90deg,#0071c2,#005999);color:#fff;border-color:transparent;box-shadow:0 8px 16px rgba(0,113,194,.28)}
 .room-type-section{margin:14px 0 22px}
 .room-type-title{font-weight:800;color:#0f172a;margin-bottom:10px;padding:8px 12px;border-radius:10px;background:#eaf3ff;display:inline-block}
 .room-list-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
