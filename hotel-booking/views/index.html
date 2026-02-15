@@ -1,0 +1,30 @@
+{{define "content"}}
+<section class="hero hero-gradient">
+  <div>
+    <span class="hero-tag">Best Deal Hotel Indonesia</span>
+    <h1>Temukan hotel impian kamu dengan harga terbaik</h1>
+    <p>Desain modern ala Traveloka + Booking.com dengan fokus pada kemudahan pencarian, kenyamanan visual, dan konversi booking.</p>
+  </div>
+</section>
+{{if .Message}}<div class="alert">{{.Message}}</div>{{end}}
+<section class="section-head">
+  <h3>Rekomendasi Hotel Populer</h3>
+  <p>{{len .Hotels}} hotel siap dipesan hari ini</p>
+</section>
+<section class="grid">
+  {{range .Hotels}}
+  <article class="card">
+    <img src="{{.ImageURL}}" alt="{{.Name}}"/>
+    <div class="card-body">
+      <div class="row-between">
+        <h3>{{.Name}}</h3>
+        <span class="rating">★ {{.Rating}}</span>
+      </div>
+      <p class="muted">{{.City}}</p>
+      <p>Mulai dari <strong>Rp{{.PriceStart}}</strong>/malam</p>
+      <a class="btn" href="/hotel?id={{.ID}}">Lihat Detail</a>
+    </div>
+  </article>
+  {{end}}
+</section>
+{{end}}

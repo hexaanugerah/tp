@@ -1,0 +1,30 @@
+{{define "content"}}
+<section class="section-head">
+  <h2>Detail Kamar & Booking</h2>
+  <p>Pastikan pilihan kamar sudah sesuai kebutuhan kamu.</p>
+</section>
+
+{{if .Room}}
+<div class="booking-room-card">
+  <img class="booking-room-image" src="{{.Room.ImageURL}}" alt="{{.Room.Name}}">
+  <div>
+    <h3>{{.Room.Name}} - {{.Room.Type}}</h3>
+    <p class="muted">👤 {{.Room.Capacity}} tamu • 🛏️ {{.Room.Beds}} kasur • 💳 Rp{{.Room.Price}}/malam</p>
+    <div class="facility-list">
+      {{range .Room.Facilities}}<span class="chip">{{.}}</span>{{end}}
+    </div>
+  </div>
+</div>
+{{end}}
+
+<section class="auth-wrap">
+  <h3>Lengkapi Tanggal Menginap</h3>
+  <form class="form" action="/booking/create" method="POST">
+    <input type="hidden" name="hotel_id" value="{{.HotelID}}">
+    <input type="hidden" name="room_id" value="{{.RoomID}}">
+    <label>Check-in</label><input type="date" name="check_in" required>
+    <label>Check-out</label><input type="date" name="check_out" required>
+    <button class="btn" type="submit">Lanjut ke Payment</button>
+  </form>
+</section>
+{{end}}

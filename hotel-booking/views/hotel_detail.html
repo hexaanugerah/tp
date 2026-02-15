@@ -1,0 +1,78 @@
+{{define "content"}}
+<section class="hotel-spotlight" style="background-image:linear-gradient(120deg, rgba(0,33,71,.72), rgba(0,80,145,.45)), url('{{.Hotel.ImageURL}}');">
+  <div class="hotel-spotlight-content">
+    <span class="hero-tag">Pilihan Terbaik di {{.Hotel.City}}</span>
+    <h2>{{.Hotel.Name}}</h2>
+    <p>{{.Hotel.City}} • Rating {{.Hotel.Rating}} • {{.Hotel.Description}}</p>
+  </div>
+</section>
+
+<section class="room-showcase-fill">
+  <div class="showcase-box">
+    <h4>Kenapa pilih hotel ini?</h4>
+    <ul>
+      <li>Lokasi strategis dekat pusat kota</li>
+      <li>Proses check-in cepat & mudah</li>
+      <li>Pilihan kamar lengkap untuk semua budget</li>
+    </ul>
+  </div>
+  <div class="showcase-box">
+    <h4>Info Tambahan</h4>
+    <p>Semua tipe kamar sudah termasuk Wi-Fi, air mineral, dan dukungan customer service 24 jam.</p>
+  </div>
+</section>
+
+<section class="section-head room-head">
+  <h3>Pilih Tipe Kamar</h3>
+  <p>Bandingkan foto kamar, jumlah kasur, fasilitas, dan harga sebelum booking.</p>
+</section>
+
+<section class="room-grid">
+  {{range .RoomOptions}}
+  <article class="room-card {{if eq .Type "VIP"}}room-vip{{else if eq .Type "Deluxe"}}room-deluxe{{else}}room-basic{{end}}">
+    <img class="room-image" src="{{.ImageURL}}" alt="Kamar {{.Type}}" />
+
+    <div class="room-top">
+      <span class="chip">{{.Type}}</span>
+      <span class="room-stock">{{.TotalRooms}} kamar</span>
+    </div>
+
+    <p class="room-price">Rp{{.Price}} <small>/malam</small></p>
+    <p class="muted">👤 {{.Capacity}} tamu • 🛏️ {{.Beds}} kasur</p>
+
+    <ul class="room-features">
+      {{range .Facilities}}<li>✅ {{.}}</li>{{end}}
+    </ul>
+
+    <a class="btn room-btn" href="/booking?hotel_id={{.HotelID}}&room_id={{.RoomID}}">Pilih {{.Type}}</a>
+  </article>
+  {{end}}
+</section>
+
+<section class="section-head room-head detail-list-head">
+  <h3>Daftar Lengkap Kamar (10 Kamar per Tipe)</h3>
+  <p>Semua kamar bisa dipilih langsung sesuai tipe favoritmu.</p>
+</section>
+
+{{range .RoomGroups}}
+<section class="room-type-section">
+  <div class="room-type-title">Tipe {{.Type}} ({{len .Rooms}} Kamar)</div>
+  <div class="room-list-grid">
+    {{range .Rooms}}
+    <article class="room-item-card">
+      <img src="{{.ImageURL}}" alt="{{.Name}}" class="room-item-image"/>
+      <div class="room-item-body">
+        <h4>{{.Name}}</h4>
+        <p class="muted">👤 {{.Capacity}} tamu • 🛏️ {{.Beds}} kasur</p>
+        <p><strong>Rp{{.Price}}</strong>/malam</p>
+        <div class="facility-list compact">
+          {{range .Facilities}}<span class="chip">{{.}}</span>{{end}}
+        </div>
+        <a class="btn room-btn" href="/booking?hotel_id={{.HotelID}}&room_id={{.ID}}">Pilih Kamar Ini</a>
+      </div>
+    </article>
+    {{end}}
+  </div>
+</section>
+{{end}}
+{{end}}

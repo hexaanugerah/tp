@@ -1,0 +1,16 @@
+{{define "content"}}
+<section class="section-head">
+  <h2>Payment Gateway</h2>
+  <p>Simulasi Midtrans - aman, cepat, dan praktis.</p>
+</section>
+{{if .Booking}}
+<div class="payment-box">
+  <p>ID Payment: <strong>{{.Booking.PaymentID}}</strong></p>
+  <p>Total: <strong>Rp{{.Booking.TotalPrice}}</strong></p>
+  <p>Status: <span class="chip">{{.Booking.PaymentStat}}</span></p>
+  <button class="btn">Bayar Sekarang</button>
+</div>
+{{else}}
+<p class="muted">Transaksi tidak ditemukan.</p>
+{{end}}
+{{end}}
