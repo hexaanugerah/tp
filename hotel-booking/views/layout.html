@@ -1,0 +1,36 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{.AppName}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-wrap">
+      <span class="brand-badge">TB</span>
+      <div class="brand">TravelBook</div>
+    </div>
+    <nav>
+      <a href="/">Hotel</a>
+      <a href="/recommendations">Rekomendasi</a>
+      {{if .CurrentUser}}
+      <a href="/booking">Booking</a>
+      <a href="/logout" class="nav-pill">Logout</a>
+      {{else}}
+      <a href="/login">Login</a>
+      <a href="/register" class="nav-pill">Daftar</a>
+      {{end}}
+    </nav>
+  </header>
+  <main class="container">
+    {{template "content" .}}
+  </main>
+</body>
+</html>
+{{end}}

@@ -1,0 +1,11 @@
+{{define "content"}}
+<section class="auth-wrap">
+  <h2>Login</h2>
+  <form class="form" action="/login" method="POST">
+    <label>Email</label><input name="email" type="email" required>
+    <label>Password</label><input name="password" type="password" required>
+    <button class="btn" type="submit">Masuk</button>
+  </form>
+  <p class="muted">Akun demo: admin@hotel.com/admin123 atau guest@hotel.com/guest123</p>
+</section>
+{{end}}
