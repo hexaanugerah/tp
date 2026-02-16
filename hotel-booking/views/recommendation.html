@@ -1,0 +1,8 @@
+{{define "content"}}
+<h1>Top 5 Rekomendasi Hotel</h1>
+<ul>
+{{range .Hotels}}
+<li><strong>{{.Name}}</strong> - {{.City}} (⭐ {{printf "%.1f" .Rating}})</li>
+{{end}}
+</ul>
+{{end}}

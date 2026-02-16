@@ -1,0 +1,65 @@
+{{define "content"}}
+<section class="detail-banner">
+  <img src="{{.Hotel.ImageURL}}" alt="{{.Hotel.Name}}">
+  <div>
+    <h1>{{.Hotel.Name}}</h1>
+    <p>{{.Hotel.Address}}, {{.Hotel.City}}</p>
+    <p>⭐ {{printf "%.1f" .Hotel.Rating}}</p>
+    <p>{{.Hotel.Description}}</p>
+    <div class="amenity-list">
+      {{range .Hotel.Amenities}}<span>{{.}}</span>{{end}}
+    </div>
+  </div>
+</section>
+
+<section class="type-select">
+  <h2>Pilih Tipe Kamar (terpisah)</h2>
+  <p>Klik tipe kamar untuk menampilkan pilihan kamar per kategori, tidak digabung.</p>
+  <div class="chip-wrap">
+    <a class="chip" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">VIP (10 kamar)</a>
+    <a class="chip" href="/hotel/{{.Hotel.ID}}/rooms?type=deluxe">Deluxe (10 kamar)</a>
+    <a class="chip" href="/hotel/{{.Hotel.ID}}/rooms?type=biasa">Biasa (10 kamar)</a>
+  </div>
+</section>
+
+<section class="type-diff-grid">
+  <article class="type-diff-card vip">
+    <h3>VIP</h3>
+    <ul>
+      <li>2 King Bed</li>
+      <li>Private Lounge & Mini Bar</li>
+      <li>Bathtub + Smart TV 65"</li>
+      <li>Kapasitas 4 orang</li>
+    </ul>
+  </article>
+  <article class="type-diff-card deluxe">
+    <h3>Deluxe</h3>
+    <ul>
+      <li>1 King + 1 Single Bed</li>
+      <li>City View & Work Desk</li>
+      <li>Rain Shower + Smart TV 50"</li>
+      <li>Kapasitas 3 orang</li>
+    </ul>
+  </article>
+  <article class="type-diff-card biasa">
+    <h3>Biasa</h3>
+    <ul>
+      <li>1 Queen Bed</li>
+      <li>WiFi + AC + Smart TV 43"</li>
+      <li>Hot Shower</li>
+      <li>Kapasitas 2 orang</li>
+    </ul>
+  </article>
+</section>
+
+<section class="map-grid">
+  <article class="map-card">
+    <h3>Denah Semua Kamar - {{.Hotel.Name}}</h3>
+    <img src="{{.Hotel.FloorMapURL}}" alt="Denah kamar {{.Hotel.Name}}">
+  </article>
+  <article class="map-card">
+    <h3>Lokasi Hotel</h3>
+    <iframe src="{{.Hotel.LocationMapURL}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </article>
+</section>
+{{end}}

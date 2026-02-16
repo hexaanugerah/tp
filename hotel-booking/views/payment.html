@@ -1,0 +1,19 @@
+{{define "content"}}
+<section class="payment-card">
+  <h1>Pembayaran Booking {{.Booking.BookingCode}}</h1>
+  <p>Hotel: {{.Hotel.Name}} | Kamar: {{.Room.RoomNumber}} ({{.Room.Type.Label}})</p>
+  <p>Total bayar: <strong>Rp{{.Booking.TotalPrice}}</strong></p>
+  <p>Token Midtrans Mock: <code>{{.Booking.PaymentToken}}</code></p>
+
+  <form method="post" action="/payment/pay" class="form-grid">
+    <input type="hidden" name="booking_id" value="{{.Booking.ID}}">
+    <select name="method">
+      <option>QRIS</option>
+      <option>Virtual Account BCA</option>
+      <option>Kartu Kredit</option>
+      <option>E-Wallet</option>
+    </select>
+    <button type="submit">Bayar Sekarang</button>
+  </form>
+</section>
+{{end}}
