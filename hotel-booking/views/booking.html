@@ -1,0 +1,57 @@
+{{define "content"}}
+<section class="room-hero">
+  <div class="room-hero-left">
+    <p class="room-kicker">Room Selection Experience</p>
+    <h1>{{.Hotel.Name}} • Tipe {{.RoomType.Label}}</h1>
+    <p>Pilih tipe kamar dulu, lalu lanjut pilih kamar terbaik dengan fasilitas yang paling cocok untuk kebutuhanmu.</p>
+    <div class="chip-wrap">
+      <a class="chip {{if eq .CurrentType "vip"}}chip-active{{end}}" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">VIP</a>
+      <a class="chip {{if eq .CurrentType "deluxe"}}chip-active{{end}}" href="/hotel/{{.Hotel.ID}}/rooms?type=deluxe">Deluxe</a>
+      <a class="chip {{if eq .CurrentType "biasa"}}chip-active{{end}}" href="/hotel/{{.Hotel.ID}}/rooms?type=biasa">Biasa</a>
+    </div>
+  </div>
+  <aside class="room-hero-side">
+    <div class="mini-stat"><strong>10</strong><span>Kamar tiap tipe</span></div>
+    <div class="mini-stat"><strong>Instant</strong><span>Konfirmasi booking</span></div>
+    <div class="mini-stat"><strong>Secure</strong><span>Pembayaran gateway</span></div>
+  </aside>
+</section>
+
+<section class="room-list-modern">
+{{range .Rooms}}
+  <article class="room-item-modern">
+    <div class="room-media">
+      <img src="{{.FloorMapURL}}" alt="Denah kamar {{.RoomNumber}}">
+      <span class="room-badge">{{.Type.Label}}</span>
+    </div>
+
+    <div class="room-content">
+      <div class="room-title-row">
+        <h3>Kamar {{.RoomNumber}}</h3>
+        <p class="room-price">Rp{{.PricePerDay}}<span>/malam</span></p>
+      </div>
+
+      <div class="room-meta-grid">
+        <div><small>Kasur</small><strong>{{.Beds}}</strong></div>
+        <div><small>Kapasitas</small><strong>{{.Capacity}} Orang</strong></div>
+        <div><small>Sarapan</small><strong>{{if .HasBreakfast}}Include{{else}}Optional{{end}}</strong></div>
+      </div>
+
+      <div class="facility-chips">
+        {{range .Facilities}}<span>{{.}}</span>{{end}}
+        {{if .HasBreakfast}}<span>Breakfast</span>{{end}}
+      </div>
+    </div>
+
+    <form method="post" action="/booking/create" class="room-book-panel">
+      <input type="hidden" name="room_id" value="{{.ID}}">
+      <label>Check in</label>
+      <input type="date" name="check_in" required>
+      <label>Check out</label>
+      <input type="date" name="check_out" required>
+      <button type="submit">Pilih Kamar Ini</button>
+    </form>
+  </article>
+{{end}}
+</section>
+{{end}}
