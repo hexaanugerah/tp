@@ -2,12 +2,24 @@ package routes
 
 import (
 	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"hotel-booking/config"
 	"hotel-booking/controllers"
 	"hotel-booking/middleware"
 )
+
+func resolveStaticDir() string {
+	candidates := []string{"static", filepath.Join("hotel-booking", "static")}
+	for _, dir := range candidates {
+		if info, err := os.Stat(dir); err == nil && info.IsDir() {
+			return dir
+		}
+	}
+	return "static"
+}
 
 func Register(cfg config.AppConfig) *http.ServeMux {
 	mux := http.NewServeMux()
@@ -22,7 +34,7 @@ func Register(cfg config.AppConfig) *http.ServeMux {
 	webhook := controllers.WebhookController{}
 	email := controllers.EmailController{}
 
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(resolveStaticDir()))))
 	mux.HandleFunc("/", hotel.Home)
 	mux.HandleFunc("/recommendations", reco.TopHotels)
 
