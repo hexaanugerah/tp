@@ -1,13 +1,18 @@
 {{define "content"}}
-<section class="detail-banner">
+<section class="detail-hero">
   <img src="{{.Hotel.ImageURL}}" alt="{{.Hotel.Name}}">
-  <div>
+  <div class="detail-info">
+    <p class="detail-kicker">Hotel Detail</p>
     <h1>{{.Hotel.Name}}</h1>
     <p>{{.Hotel.Address}}, {{.Hotel.City}}</p>
     <p>⭐ {{printf "%.1f" .Hotel.Rating}}</p>
     <p>{{.Hotel.Description}}</p>
     <div class="amenity-list">
       {{range .Hotel.Amenities}}<span>{{.}}</span>{{end}}
+    </div>
+    <div class="detail-actions">
+      <a class="btn" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">Lihat Kamar VIP</a>
+      <a class="btn btn-ghost" href="/hotel/{{.Hotel.ID}}/rooms?type=deluxe">Lihat Deluxe</a>
     </div>
   </div>
 </section>
@@ -23,33 +28,9 @@
 </section>
 
 <section class="type-diff-grid">
-  <article class="type-diff-card vip">
-    <h3>VIP</h3>
-    <ul>
-      <li>2 King Bed</li>
-      <li>Private Lounge & Mini Bar</li>
-      <li>Bathtub + Smart TV 65"</li>
-      <li>Kapasitas 4 orang</li>
-    </ul>
-  </article>
-  <article class="type-diff-card deluxe">
-    <h3>Deluxe</h3>
-    <ul>
-      <li>1 King + 1 Single Bed</li>
-      <li>City View & Work Desk</li>
-      <li>Rain Shower + Smart TV 50"</li>
-      <li>Kapasitas 3 orang</li>
-    </ul>
-  </article>
-  <article class="type-diff-card biasa">
-    <h3>Biasa</h3>
-    <ul>
-      <li>1 Queen Bed</li>
-      <li>WiFi + AC + Smart TV 43"</li>
-      <li>Hot Shower</li>
-      <li>Kapasitas 2 orang</li>
-    </ul>
-  </article>
+  <article class="type-diff-card vip"><h3>VIP</h3><ul><li>2 King Bed</li><li>Private Lounge & Mini Bar</li><li>Bathtub + Smart TV 65"</li><li>Kapasitas 4 orang</li></ul></article>
+  <article class="type-diff-card deluxe"><h3>Deluxe</h3><ul><li>1 King + 1 Single Bed</li><li>City View & Work Desk</li><li>Rain Shower + Smart TV 50"</li><li>Kapasitas 3 orang</li></ul></article>
+  <article class="type-diff-card biasa"><h3>Biasa</h3><ul><li>1 Queen Bed</li><li>WiFi + AC + Smart TV 43"</li><li>Hot Shower</li><li>Kapasitas 2 orang</li></ul></article>
 </section>
 
 <section class="map-grid">
