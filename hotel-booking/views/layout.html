@@ -1,0 +1,27 @@
+{{define "layout"}}
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Title}} | GoStay</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="/">GoStay</a>
+      <nav>
+        <a href="/">Hotel</a>
+        <a href="/recommendations">Rekomendasi</a>
+        <a href="/dashboard">Booking Saya</a>
+        <a href="/login">Login</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    {{template "content" .}}
+  </main>
+</body>
+</html>
+{{end}}

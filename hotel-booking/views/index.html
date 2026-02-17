@@ -1,0 +1,80 @@
+{{define "content"}}
+<section class="hero hero-upgraded">
+  <div class="hero-left">
+    <span class="hero-badge">Best Hotel Deal • GoStay</span>
+    <h1>Temukan hotel impianmu dengan nuansa Traveloka × Booking</h1>
+    <p>Bandingkan, pilih tipe kamar VIP/Deluxe/Biasa, dan bayar cepat via payment gateway.</p>
+    <form method="get" class="search-grid">
+      <input name="q" placeholder="Cari nama hotel" value="{{.Query}}">
+      <input name="city" placeholder="Kota tujuan" value="{{.City}}">
+      <button type="submit">Cari Hotel</button>
+    </form>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat"><strong>10 Hotel</strong><span>Siap dibooking</span></div>
+    <div class="hero-stat"><strong>300 Kamar</strong><span>VIP, Deluxe, Biasa</span></div>
+    <div class="hero-stat"><strong>Pembayaran</strong><span>QRIS, VA, Kartu, E-Wallet</span></div>
+  </div>
+</section>
+
+<section class="overview-split">
+  <article class="mini-map-panel">
+    <h3>Map Lokasi Hotel (Ringkas)</h3>
+    <p>Posisi map di kiri atas (agak bawah hero) sesuai request.</p>
+    <iframe src="https://maps.google.com/maps?q=Indonesia%20hotels&t=&z=5&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </article>
+  <article class="comment-panel">
+    <h3>Komentar Hotel</h3>
+    <div class="comment-list">
+      {{range .Comments}}
+      <div class="comment-item">
+        <p class="comment-title"><strong>{{.HotelName}}</strong> • {{.City}} • ⭐ {{printf "%.1f" .Rating}}</p>
+        <p>{{.Message}}</p>
+      </div>
+      {{end}}
+    </div>
+  </article>
+</section>
+
+<section class="hotel-grid">
+  {{range .Hotels}}
+  <article class="card hotel-card-pop">
+    <img src="{{.ImageURL}}" alt="{{.Name}}">
+    <div class="card-body">
+      <h3>{{.Name}}</h3>
+      <p>{{.City}} • ⭐ {{printf "%.1f" .Rating}}</p>
+      <p>{{.Description}}</p>
+      <div class="card-cta-row">
+        <button type="button" class="btn btn-ghost" onclick="openHotelModal('hotel-modal-{{.ID}}')">Pilih Hotel</button>
+        <a class="btn" href="/hotel/{{.ID}}">Lihat Detail</a>
+      </div>
+    </div>
+  </article>
+
+  <dialog id="hotel-modal-{{.ID}}" class="hotel-modal">
+    <div class="hotel-modal-head">
+      <h3>{{.Name}}</h3>
+      <button type="button" class="modal-close" onclick="closeHotelModal('hotel-modal-{{.ID}}')">✕</button>
+    </div>
+    <img src="{{.ImageURL}}" alt="{{.Name}}">
+    <p>{{.City}} • ⭐ {{printf "%.1f" .Rating}}</p>
+    <p>{{.Description}}</p>
+    <div class="modal-actions">
+      <a class="btn" href="/hotel/{{.ID}}">Lihat Detail Hotel</a>
+      <a class="btn btn-ghost" href="/hotel/{{.ID}}/rooms?type=vip">Pilih Kamar VIP</a>
+    </div>
+  </dialog>
+  {{end}}
+</section>
+
+<script>
+  function openHotelModal(id) {
+    const modal = document.getElementById(id);
+    if (modal && typeof modal.showModal === 'function') modal.showModal();
+  }
+  function closeHotelModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.close();
+  }
+</script>
+{{end}}
