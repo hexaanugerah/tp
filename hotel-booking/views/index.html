@@ -25,13 +25,14 @@
       <div>
         <span class="city-badge">10 Hotel</span>
         <h3>{{.Name}}</h3>
+        <p class="iconic-name">Ikonik: {{.IconicSpot}}</p>
         <p>Mulai dari {{.Price}} • pilihan terbaik untuk staycation & business trip.</p>
       </div>
     </button>
 
     <dialog id="city-modal-{{.Name}}" class="city-modal">
       <div class="hotel-modal-head">
-        <h3>{{.Name}} • 10 Hotel</h3>
+        <h3>{{.Name}} • 10 Hotel • {{.IconicSpot}}</h3>
         <button type="button" class="modal-close" onclick="closeCityModal('city-modal-{{.Name}}')">✕</button>
       </div>
       <ul>
