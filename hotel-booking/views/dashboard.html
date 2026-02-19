@@ -1,0 +1,15 @@
+{{define "content"}}
+<h1>Booking Saya</h1>
+<table>
+  <tr><th>Kode</th><th>Hotel</th><th>Kamar</th><th>Status</th><th>Pembayaran</th></tr>
+  {{range .Bookings}}
+  <tr>
+    <td>{{.BookingCode}}</td>
+    <td>{{(index $.Hotels .HotelID).Name}}</td>
+    <td>{{(index $.Rooms .RoomID).RoomNumber}}</td>
+    <td>{{.Status}}</td>
+    <td>{{.PaymentStatus}}</td>
+  </tr>
+  {{end}}
+</table>
+{{end}}
