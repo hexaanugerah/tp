@@ -1,39 +1,51 @@
 {{define "content"}}
-<section class="hero hero-upgraded">
-  <div class="hero-left">
-    <span class="hero-badge">Best Hotel Deal • GoStay</span>
-    <h1>Temukan hotel impianmu dengan nuansa Traveloka × Booking</h1>
-    <p>Bandingkan, pilih tipe kamar VIP/Deluxe/Biasa, dan bayar cepat via payment gateway.</p>
-    <form method="get" class="search-grid">
-      <input name="q" placeholder="Cari nama hotel" value="{{.Query}}">
-      <input name="city" placeholder="Kota tujuan" value="{{.City}}">
-      <button type="submit">Cari Hotel</button>
-    </form>
-  </div>
-  <div class="hero-right">
-    <div class="hero-stat"><strong>10 Hotel</strong><span>Siap dibooking</span></div>
-    <div class="hero-stat"><strong>300 Kamar</strong><span>VIP, Deluxe, Biasa</span></div>
-    <div class="hero-stat"><strong>Pembayaran</strong><span>QRIS, VA, Kartu, E-Wallet</span></div>
-  </div>
+<section class="home-search-bar">
+  <form method="get" class="home-search-grid">
+    <label>
+      Kota, tujuan, atau nama hotel
+      <input name="q" placeholder="Kota, hotel, tempat wisata" value="{{.Query}}">
+    </label>
+    <label>
+      Tanggal Check-in & Check-out
+      <input name="date" value="Kam, 19 Feb 2026 - Jum, 20 Feb 2026">
+      <small>Durasi: 1 Malam</small>
+    </label>
+    <label>
+      Tamu dan Kamar
+      <input name="guest" value="2 Dewasa, 0 Anak, 1 Kamar">
+    </label>
+    <button type="submit">Cari</button>
+  </form>
 </section>
 
-<section class="overview-split">
-  <article class="mini-map-panel">
-    <h3>Map Lokasi Hotel (Ringkas)</h3>
-    <p>Posisi map di kiri atas (agak bawah hero) sesuai request.</p>
-    <iframe src="https://maps.google.com/maps?q=Indonesia%20hotels&t=&z=5&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </article>
-  <article class="comment-panel">
-    <h3>Komentar Hotel</h3>
-    <div class="comment-list">
-      {{range .Comments}}
-      <div class="comment-item">
-        <p class="comment-title"><strong>{{.HotelName}}</strong> • {{.City}} • ⭐ {{printf "%.1f" .Rating}}</p>
-        <p>{{.Message}}</p>
-      </div>
-      {{end}}
-    </div>
-  </article>
+<section class="destination-grid">
+  <a class="dest-card" href="/?city=bandung" style="background-image:url('https://images.unsplash.com/photo-1558005530-a7958896ec60?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Bandung</h3><p>Hotel Murah di Bandung mulai dari Rp 47.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=yogyakarta" style="background-image:url('https://images.unsplash.com/photo-1532186651327-6ac23687d189?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Yogyakarta</h3><p>Hotel Murah di Yogyakarta mulai dari Rp 40.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=bali" style="background-image:url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Bali</h3><p>Hotel Murah di Bali mulai dari Rp 56.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=singapore" style="background-image:url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Singapore</h3><p>Hotel Murah di Singapura mulai dari Rp 239.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=kuala%20lumpur" style="background-image:url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Kuala Lumpur</h3><p>Hotel Murah di Kuala Lumpur mulai dari Rp 67.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=bangkok" style="background-image:url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Bangkok</h3><p>Hotel Murah di Bangkok mulai dari Rp 47.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=penang" style="background-image:url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Penang</h3><p>Hotel Murah di Penang mulai dari Rp 98.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=seoul" style="background-image:url('https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Seoul</h3><p>Hotel Murah di Seoul mulai dari Rp 280.000</p></div>
+  </a>
+  <a class="dest-card" href="/?city=tokyo" style="background-image:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80')">
+    <div><h3>Tokyo</h3><p>Hotel Murah di Tokyo mulai dari Rp 268.000</p></div>
+  </a>
 </section>
 
 <section class="hotel-grid">

@@ -35,7 +35,7 @@ func Register(cfg config.AppConfig) *http.ServeMux {
 	email := controllers.EmailController{}
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(resolveStaticDir()))))
-	mux.HandleFunc("/", hotel.Home)
+	mux.HandleFunc("/", middleware.AuthRequired(cfg, hotel.Home))
 	mux.HandleFunc("/recommendations", reco.TopHotels)
 
 	mux.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
