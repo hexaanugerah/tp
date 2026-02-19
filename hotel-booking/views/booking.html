@@ -1,0 +1,61 @@
+{{define "content"}}
+<section class="room-type-layout">
+  <aside class="type-sidebar">
+    <h2>{{.RoomType.Label}}</h2>
+    {{with index .Rooms 0}}<img src="{{.FloorMapURL}}" alt="{{$.RoomType.Label}}">{{end}}
+    <p class="room-size">36.0 m²</p>
+    <ul class="quick-facilities">
+      <li>Shower</li><li>Air panas</li><li>AC</li><li>Free WiFi</li>
+    </ul>
+    <a href="/hotel/{{.Hotel.ID}}">Lihat Detail Kamar</a>
+
+    <div class="type-switch">
+      <a class="chip {{if eq .CurrentType "vip"}}chip-active{{end}}" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">VIP</a>
+      <a class="chip {{if eq .CurrentType "deluxe"}}chip-active{{end}}" href="/hotel/{{.Hotel.ID}}/rooms?type=deluxe">Deluxe</a>
+      <a class="chip {{if eq .CurrentType "biasa"}}chip-active{{end}}" href="/hotel/{{.Hotel.ID}}/rooms?type=biasa">Biasa</a>
+    </div>
+  </aside>
+
+  <section class="room-table-wrap">
+    <table class="room-table">
+      <thead>
+        <tr>
+          <th>Pilihan Kamar</th>
+          <th>Tamu</th>
+          <th>Harga/kamar/malam</th>
+          <th>Kamar</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Rooms}}
+        <tr>
+          <td>
+            <p class="option-type">{{.Type.Label}} - Free Breakfast</p>
+            <h4>Sarapan untuk {{.Capacity}}</h4>
+            <p>{{.Beds}}</p>
+            <p class="free-cancel">✓ Gratis pembatalan</p>
+          </td>
+          <td>👤 {{.Capacity}}</td>
+          <td>
+            <p class="old-price">Rp 491.400</p>
+            <p class="new-price">Rp {{.PricePerDay}}</p>
+            <small>Di luar pajak & biaya</small>
+          </td>
+          <td>x1</td>
+          <td>
+            <form method="post" action="/booking/create">
+              <input type="hidden" name="room_id" value="{{.ID}}">
+              <input type="hidden" name="check_in" value="2026-03-31">
+              <input type="hidden" name="check_out" value="2026-04-01">
+              <button type="submit">Pilih</button>
+            </form>
+            <p class="remaining">Sisa 5 kamar!</p>
+          </td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </section>
+</section>
+{{end}}
