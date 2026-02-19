@@ -1,11 +1,25 @@
 {{define "content"}}
-<section class="auth-card">
+<section class="auth-card auth-modern">
   <h2>Login Akun</h2>
+  <p class="auth-sub">Masuk sebagai Pengguna, Admin, atau Staff Hotel.</p>
   <form method="post" class="form-grid">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
+    <select name="role" required>
+      <option value="user">Pengguna</option>
+      <option value="admin">Admin</option>
+      <option value="hotel_staff">Staff Hotel</option>
+    </select>
     <button type="submit">Masuk</button>
   </form>
+
+  {{if .GoogleLoginReady}}
+  <a class="btn google-btn" href="/auth/google/login">Masuk dengan Google (Gmail resmi)</a>
+  {{else}}
+  <p class="oauth-note">Google Login belum aktif. Isi GOOGLE_CLIENT_ID dan GOOGLE_CLIENT_SECRET di environment.</p>
+  {{end}}
+
   <p>Belum punya akun? <a href="/register">Daftar</a></p>
+  <p class="seed-note">Akun demo: admin@gostay.local / admin123, staff@gostay.local / staff123.</p>
 </section>
 {{end}}

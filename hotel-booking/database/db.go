@@ -106,4 +106,8 @@ func seedData() {
 	admin := &models.User{ID: DB.NextUserID, Name: "Admin", Email: "admin@gostay.local", PasswordHash: "admin123", Role: models.RoleAdmin}
 	DB.Users[admin.ID] = admin
 	DB.NextUserID++
+
+	staff := &models.User{ID: DB.NextUserID, Name: "Hotel Staff", Email: "staff@gostay.local", PasswordHash: "staff123", Role: models.RoleHotelStaff}
+	DB.Users[staff.ID] = staff
+	DB.NextUserID++
 }

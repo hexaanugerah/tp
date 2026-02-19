@@ -52,6 +52,8 @@ func Register(cfg config.AppConfig) *http.ServeMux {
 		}
 		auth.RegisterPage(w, r)
 	})
+	mux.HandleFunc("/auth/google/login", auth.GoogleLogin)
+	mux.HandleFunc("/auth/google/callback", auth.GoogleCallback)
 	mux.HandleFunc("/logout", auth.Logout)
 
 	mux.HandleFunc("/hotel/", func(w http.ResponseWriter, r *http.Request) {

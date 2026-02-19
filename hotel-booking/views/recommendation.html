@@ -1,8 +1,29 @@
 {{define "content"}}
-<h1>Top 5 Rekomendasi Hotel</h1>
-<ul>
-{{range .Hotels}}
-<li><strong>{{.Name}}</strong> - {{.City}} (⭐ {{printf "%.1f" .Rating}})</li>
-{{end}}
-</ul>
+<section class="reco-hero">
+  <h1>Rekomendasi Hotel Terbaik Untuk Kamu</h1>
+  <p>Kurasi hotel dengan rating tertinggi, fasilitas terbaik, dan lokasi favorit traveler.</p>
+</section>
+
+<section class="reco-grid">
+  {{range .Hotels}}
+  <article class="reco-card">
+    <img src="{{.ImageURL}}" alt="{{.Name}}">
+    <div class="reco-body">
+      <div class="reco-top">
+        <h3>{{.Name}}</h3>
+        <span class="reco-rating">⭐ {{printf "%.1f" .Rating}}</span>
+      </div>
+      <p>{{.City}} • {{.Address}}</p>
+      <p>{{.Description}}</p>
+      <div class="amenity-list">
+        {{range .Amenities}}<span>{{.}}</span>{{end}}
+      </div>
+      <div class="reco-actions">
+        <a class="btn" href="/hotel/{{.ID}}">Lihat Detail</a>
+        <a class="btn btn-ghost" href="/hotel/{{.ID}}/rooms?type=vip">Pilih Kamar</a>
+      </div>
+    </div>
+  </article>
+  {{end}}
+</section>
 {{end}}

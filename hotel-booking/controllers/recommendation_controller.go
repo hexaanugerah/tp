@@ -16,8 +16,8 @@ func (rc RecommendationController) TopHotels(w http.ResponseWriter, r *http.Requ
 		items = append(items, h)
 	}
 	sort.Slice(items, func(i, j int) bool { return items[i].Rating > items[j].Rating })
-	if len(items) > 5 {
-		items = items[:5]
+	if len(items) > 6 {
+		items = items[:6]
 	}
 	renderTemplate(w, "recommendation.html", map[string]any{"Title": "Rekomendasi", "Hotels": items})
 }
