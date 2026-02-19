@@ -1,0 +1,41 @@
+{{define "content"}}
+<section class="login-shell">
+  <article class="login-card-ref">
+    <header class="login-offer-head">
+      <h2>Ada penawaran yang kamu mungkin suka!</h2>
+      <span>✨</span>
+    </header>
+
+    {{if .GoogleLoginReady}}
+    <a class="social-btn social-google" href="/auth/google/login"><span>G</span>Google</a>
+    {{else}}
+    <button class="social-btn social-google" type="button" disabled><span>G</span>Google (set env dulu)</button>
+    {{end}}
+
+    <div class="social-row">
+      <button class="social-btn" type="button"><span></span>Apple</button>
+      <button class="social-btn" type="button"><span>f</span>Facebook</button>
+    </div>
+
+    <details class="login-alt">
+      <summary>Metode lain</summary>
+      <form method="post" class="form-grid">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <select name="role" required>
+          <option value="user">Pengguna</option>
+          <option value="admin">Admin</option>
+          <option value="hotel_staff">Staff Hotel</option>
+        </select>
+        <button type="submit">Masuk</button>
+      </form>
+      <p class="seed-note">Akun demo: admin@gostay.local / admin123, staff@gostay.local / staff123.</p>
+    </details>
+
+    <p class="login-note">Harga lebih rendah dan reward menanti. Dapatkan saat masuk ke akunmu.</p>
+    <p class="login-term">Dengan melanjutkan, kamu menyetujui <a href="#">Syarat & Ketentuan</a> serta <a href="#">Pemberitahuan Privasi</a>.</p>
+    <p class="guest-link"><a href="/recommendations">Lihat sebagai tamu</a></p>
+    <p class="guest-link">Belum punya akun? <a href="/register">Daftar</a></p>
+  </article>
+</section>
+{{end}}
