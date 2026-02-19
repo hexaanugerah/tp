@@ -18,73 +18,54 @@
   </form>
 </section>
 
-<section class="destination-grid">
-  <a class="dest-card" href="/?city=bandung" style="background-image:url('https://images.unsplash.com/photo-1558005530-a7958896ec60?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Bandung</h3><p>Hotel Murah di Bandung mulai dari Rp 47.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=yogyakarta" style="background-image:url('https://images.unsplash.com/photo-1532186651327-6ac23687d189?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Yogyakarta</h3><p>Hotel Murah di Yogyakarta mulai dari Rp 40.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=bali" style="background-image:url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Bali</h3><p>Hotel Murah di Bali mulai dari Rp 56.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=singapore" style="background-image:url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Singapore</h3><p>Hotel Murah di Singapura mulai dari Rp 239.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=kuala%20lumpur" style="background-image:url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Kuala Lumpur</h3><p>Hotel Murah di Kuala Lumpur mulai dari Rp 67.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=bangkok" style="background-image:url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Bangkok</h3><p>Hotel Murah di Bangkok mulai dari Rp 47.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=penang" style="background-image:url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Penang</h3><p>Hotel Murah di Penang mulai dari Rp 98.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=seoul" style="background-image:url('https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Seoul</h3><p>Hotel Murah di Seoul mulai dari Rp 280.000</p></div>
-  </a>
-  <a class="dest-card" href="/?city=tokyo" style="background-image:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80')">
-    <div><h3>Tokyo</h3><p>Hotel Murah di Tokyo mulai dari Rp 268.000</p></div>
-  </a>
-</section>
-
-<section class="hotel-grid">
-  {{range .Hotels}}
-  <article class="card hotel-card-pop">
-    <img src="{{.ImageURL}}" alt="{{.Name}}">
-    <div class="card-body">
-      <h3>{{.Name}}</h3>
-      <p>{{.City}} • ⭐ {{printf "%.1f" .Rating}}</p>
-      <p>{{.Description}}</p>
-      <div class="card-cta-row">
-        <button type="button" class="btn btn-ghost" onclick="openHotelModal('hotel-modal-{{.ID}}')">Pilih Hotel</button>
-        <a class="btn" href="/hotel/{{.ID}}">Lihat Detail</a>
+<section class="city-map-wrap">
+  <article class="city-grid">
+    {{range .CityDeals}}
+    <button type="button" class="dest-card" onclick="openCityModal('city-modal-{{.Name}}')" style="background-image:url('{{.ImageURL}}')">
+      <div>
+        <h3>{{.Name}}</h3>
+        <p>Hotel Murah di {{.Name}} mulai dari {{.Price}}</p>
+        <small>10 Hotel Tersedia</small>
       </div>
-    </div>
+    </button>
+
+    <dialog id="city-modal-{{.Name}}" class="city-modal">
+      <div class="hotel-modal-head">
+        <h3>{{.Name}} • 10 Hotel</h3>
+        <button type="button" class="modal-close" onclick="closeCityModal('city-modal-{{.Name}}')">✕</button>
+      </div>
+      <ul>
+        <li>{{.Name}} Premier Stay</li>
+        <li>{{.Name}} Central Hotel</li>
+        <li>{{.Name}} Skyline Suites</li>
+        <li>{{.Name}} Urban Comfort</li>
+        <li>{{.Name}} Garden Inn</li>
+        <li>{{.Name}} Business Hub Hotel</li>
+        <li>{{.Name}} Family Residence</li>
+        <li>{{.Name}} Luxury Grand</li>
+        <li>{{.Name}} Citylight Rooms</li>
+        <li>{{.Name}} Riverside Hotel</li>
+      </ul>
+      <div class="modal-actions">
+        <a class="btn" href="/?city={{.Name}}">Lihat Hotel di {{.Name}}</a>
+      </div>
+    </dialog>
+    {{end}}
   </article>
 
-  <dialog id="hotel-modal-{{.ID}}" class="hotel-modal">
-    <div class="hotel-modal-head">
-      <h3>{{.Name}}</h3>
-      <button type="button" class="modal-close" onclick="closeHotelModal('hotel-modal-{{.ID}}')">✕</button>
-    </div>
-    <img src="{{.ImageURL}}" alt="{{.Name}}">
-    <p>{{.City}} • ⭐ {{printf "%.1f" .Rating}}</p>
-    <p>{{.Description}}</p>
-    <div class="modal-actions">
-      <a class="btn" href="/hotel/{{.ID}}">Lihat Detail Hotel</a>
-      <a class="btn btn-ghost" href="/hotel/{{.ID}}/rooms?type=vip">Pilih Kamar VIP</a>
-    </div>
-  </dialog>
-  {{end}}
+  <article class="city-map-card">
+    <h3>Map Lokasi Destinasi</h3>
+    <iframe src="https://maps.google.com/maps?q=indonesia%20hotel%20destination&t=&z=4&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Pilih kota untuk lihat 10 pilihan hotel populer.</p>
+  </article>
 </section>
 
 <script>
-  function openHotelModal(id) {
+  function openCityModal(id) {
     const modal = document.getElementById(id);
     if (modal && typeof modal.showModal === 'function') modal.showModal();
   }
-  function closeHotelModal(id) {
+  function closeCityModal(id) {
     const modal = document.getElementById(id);
     if (modal) modal.close();
   }

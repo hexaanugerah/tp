@@ -19,5 +19,5 @@ func (rc RecommendationController) TopHotels(w http.ResponseWriter, r *http.Requ
 	if len(items) > 6 {
 		items = items[:6]
 	}
-	renderTemplate(w, "recommendation.html", map[string]any{"Title": "Rekomendasi", "Hotels": items})
+	renderTemplate(w, "recommendation.html", map[string]any{"Title": "Rekomendasi", "Hotels": items, "ShowLoginPopup": shouldShowLoginPopup(r)})
 }

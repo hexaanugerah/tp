@@ -37,10 +37,11 @@ func (rc RoomController) ListByType(w http.ResponseWriter, r *http.Request) {
 	}
 
 	renderTemplate(w, "booking.html", map[string]any{
-		"Title":       "Pilih Kamar",
-		"Hotel":       hotel,
-		"Rooms":       rooms,
-		"RoomType":    roomType,
-		"CurrentType": string(roomType),
+		"Title":          "Pilih Kamar",
+		"Hotel":          hotel,
+		"Rooms":          rooms,
+		"RoomType":       roomType,
+		"CurrentType":    string(roomType),
+		"ShowLoginPopup": shouldShowLoginPopup(r),
 	})
 }
