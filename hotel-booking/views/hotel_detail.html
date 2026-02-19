@@ -1,52 +1,75 @@
 {{define "content"}}
-<section class="detail-hero detail-hero-modern">
-  <div class="detail-media-wrap">
-    <img src="{{.Hotel.ImageURL}}" alt="{{.Hotel.Name}}">
-    <div class="detail-media-overlay">
-      <span>⭐ {{printf "%.1f" .Hotel.Rating}}</span>
-      <span>{{.Hotel.City}}</span>
-    </div>
-  </div>
+<section class="detail-search-strip">
+  <div class="search-box"><span>📍</span><strong>{{.Hotel.Name}}</strong></div>
+  <div class="search-box"><span>📅</span><strong>31 Mar - 01 Apr, 1 malam</strong><small>Durasi 1 malam</small></div>
+  <div class="search-box"><span>👥</span><strong>2 Dewasa, 0 Anak, 1 Kamar</strong></div>
+  <button class="search-btn">Cari Hotel</button>
+</section>
 
-  <div class="detail-info">
-    <p class="detail-kicker">Hotel Detail</p>
+<nav class="detail-tabs">
+  <a class="active" href="#info">Info Umum</a>
+  <a href="/hotel/{{.Hotel.ID}}/rooms?type=vip">Kamar</a>
+  <a href="#lokasi">Lokasi</a>
+  <a href="#fasilitas">Fasilitas</a>
+  <a href="#review">Review</a>
+</nav>
+
+<section id="info" class="photo-collage">
+  <img class="main" src="{{.Hotel.ImageURL}}" alt="{{.Hotel.Name}}">
+  <img src="{{.Hotel.ImageURL}}" alt="preview 1">
+  <img src="{{.Hotel.FloorMapURL}}" alt="preview 2">
+  <img src="{{.Hotel.ImageURL}}" alt="preview 3">
+  <img src="{{.Hotel.FloorMapURL}}" alt="preview 4">
+</section>
+
+<section class="price-floating">
+  <div>
     <h1>{{.Hotel.Name}}</h1>
-    <p class="detail-address">{{.Hotel.Address}}, {{.Hotel.City}}</p>
-    <p>{{.Hotel.Description}}</p>
-    <div class="amenity-list">
-      {{range .Hotel.Amenities}}<span>{{.}}</span>{{end}}
-    </div>
-    <div class="detail-actions">
-      <a class="btn" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">Lihat Kamar VIP</a>
-      <a class="btn btn-ghost" href="/hotel/{{.Hotel.ID}}/rooms?type=deluxe">Lihat Deluxe</a>
-    </div>
+    <p>{{.Hotel.City}} • ⭐ {{printf "%.1f" .Hotel.Rating}}</p>
+  </div>
+  <div class="price-action">
+    <small>Harga/kamar/malam mulai dari</small>
+    <strong>Rp 368.550</strong>
+    <a class="btn" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">Pilih Kamar</a>
   </div>
 </section>
 
-<section class="type-select">
-  <h2>Pilih Tipe Kamar (terpisah)</h2>
-  <p>Klik tipe kamar untuk menampilkan pilihan kamar per kategori, tidak digabung.</p>
-  <div class="chip-wrap">
-    <a class="chip" href="/hotel/{{.Hotel.ID}}/rooms?type=vip">VIP (10 kamar)</a>
-    <a class="chip" href="/hotel/{{.Hotel.ID}}/rooms?type=deluxe">Deluxe (10 kamar)</a>
-    <a class="chip" href="/hotel/{{.Hotel.ID}}/rooms?type=biasa">Biasa (10 kamar)</a>
-  </div>
-</section>
+<section class="highlight-banner">⏰ Jangan lewatkan! <strong>Sisa 5 kamar</strong> untuk harga paling murah.</section>
 
-<section class="type-diff-grid">
-  <article class="type-diff-card vip"><h3>VIP</h3><ul><li>2 King Bed</li><li>Private Lounge & Mini Bar</li><li>Bathtub + Smart TV 65"</li><li>Kapasitas 4 orang</li></ul></article>
-  <article class="type-diff-card deluxe"><h3>Deluxe</h3><ul><li>1 King + 1 Single Bed</li><li>City View & Work Desk</li><li>Rain Shower + Smart TV 50"</li><li>Kapasitas 3 orang</li></ul></article>
-  <article class="type-diff-card biasa"><h3>Biasa</h3><ul><li>1 Queen Bed</li><li>WiFi + AC + Smart TV 43"</li><li>Hot Shower</li><li>Kapasitas 2 orang</li></ul></article>
-</section>
-
-<section class="map-grid">
-  <article class="map-card">
-    <h3>Denah Semua Kamar - {{.Hotel.Name}}</h3>
-    <img src="{{.Hotel.FloorMapURL}}" alt="Denah kamar {{.Hotel.Name}}">
+<section id="review" class="detail-info-grid">
+  <article class="panel review-panel">
+    <header><strong>7,9/10</strong> Memuaskan • 617 ulasan</header>
+    <h3>Kesan Menginap Tamu Lain</h3>
+    <div class="tag-row"><span>Jarak Ke Pusat Kota</span><span>Akses</span><span>Ukuran Kamar</span></div>
+    <div class="review-item"><b>Ryan D. N.</b><p>Nyaman tempatnya, ramah pelayanannya.</p></div>
+    <div class="review-item"><b>Munawar</b><p>Tempatnya nyaman. Pelayanan ramah.</p></div>
   </article>
-  <article class="map-card">
-    <h3>Lokasi Hotel</h3>
+
+  <article id="lokasi" class="panel">
+    <div class="panel-title"><h3>Area Akomodasi</h3><a href="#">Lihat Peta</a></div>
+    <p>{{.Hotel.Address}}, {{.Hotel.City}}</p>
     <iframe src="{{.Hotel.LocationMapURL}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </article>
+
+  <article id="fasilitas" class="panel">
+    <div class="panel-title"><h3>Fasilitas Utama</h3><a href="#">Selengkapnya</a></div>
+    <ul class="amenities-grid">
+      {{range .Hotel.Amenities}}<li>{{.}}</li>{{end}}
+    </ul>
+  </article>
+
+  <article class="panel">
+    <div class="panel-title"><h3>Keunggulan Properti</h3><a href="#">Selengkapnya</a></div>
+    <p>Hotel menjaga performa layanan dengan standar tinggi dan cocok untuk liburan keluarga maupun bisnis.</p>
+    <ul>
+      <li>Harga terbaik di kelasnya</li>
+      <li>Kualitas layanan terjamin</li>
+    </ul>
+  </article>
+
+  <article class="panel">
+    <p>Menginap di {{.Hotel.Name}} saat Anda berada di {{.Hotel.City}} adalah pilihan cerdas dengan resepsionis 24 jam.</p>
+    <a href="#">Selengkapnya</a>
   </article>
 </section>
 {{end}}

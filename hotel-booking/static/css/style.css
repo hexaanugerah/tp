@@ -237,3 +237,57 @@ th,td { padding:.8rem; border-bottom:1px solid #e2e8f0; text-align:left; }
   .reco-hero h1 { font-size:1.2rem; }
   .reco-card img { height:150px; }
 }
+
+/* --- redesign mirip referensi --- */
+.detail-search-strip{display:grid;grid-template-columns:2fr 2fr 2fr auto;gap:.75rem;align-items:start;background:#fff;border:1px solid #dce5f5;border-radius:14px;padding:.8rem;margin:1rem 0}
+.search-box{border:1px solid #cfd7e5;border-radius:12px;padding:.6rem .8rem;display:grid;gap:.2rem;background:#fafcff}
+.search-box span{font-size:1rem}.search-box strong{font-size:1.05rem}.search-box small{color:#64748b}
+.search-btn{height:50px;border-radius:999px;padding:0 1.2rem}
+.detail-tabs{display:flex;gap:1.2rem;border-bottom:1px solid #d8e3f8;padding:.2rem 0 0;margin-bottom:.8rem;overflow:auto}
+.detail-tabs a{text-decoration:none;color:#5b677a;font-weight:700;padding:.7rem .15rem;white-space:nowrap}
+.detail-tabs a.active{color:#1285e2;border-bottom:4px solid #28a2ff}
+.photo-collage{display:grid;grid-template-columns:2fr repeat(2,1fr);gap:.35rem;margin:.9rem 0}
+.photo-collage img{width:100%;height:220px;object-fit:cover;border-radius:8px}
+.photo-collage .main{grid-row:span 2;height:444px}
+.price-floating{background:#fff;border:1px solid #d7e2f5;border-radius:16px;padding:.9rem 1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-top:-1rem;position:relative;z-index:2}
+.price-floating h1{margin:0}.price-action{text-align:right;display:grid;gap:.15rem}.price-action strong{font-size:2rem;color:#ef5b16}
+.highlight-banner{margin:1rem 0;background:#cceaff;border-radius:999px;padding:.9rem 1rem;color:#0b2d4f;font-weight:600}
+.detail-info-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:.8rem;margin-bottom:1.2rem}
+.panel{background:#fff;border:1px solid #dbe3ef;border-radius:14px;padding:.9rem}
+.panel iframe{width:100%;height:130px;border:0;border-radius:10px}
+.panel-title{display:flex;justify-content:space-between;align-items:center}
+.review-panel header{font-size:1.2rem;color:#0070d2;font-weight:800}
+.tag-row{display:flex;flex-wrap:wrap;gap:.4rem}.tag-row span{background:#daf9e8;color:#0b7c46;padding:.2rem .55rem;border-radius:999px;font-size:.8rem}
+.review-item{border:1px solid #e2e8f0;border-radius:10px;padding:.6rem;margin-top:.5rem}
+.amenities-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.amenities-grid li{font-weight:600}
+
+.room-type-layout{display:grid;grid-template-columns:340px 1fr;gap:1rem;margin-top:1rem}
+.type-sidebar{background:linear-gradient(165deg,#e8f4ff,#f4f9ff);border:1px solid #d7e6ff;border-radius:14px;padding:1rem}
+.type-sidebar img{width:100%;height:260px;object-fit:cover;border-radius:14px}
+.room-size{font-size:1.7rem;font-weight:800;margin:.8rem 0 .5rem}
+.quick-facilities{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;list-style:none;padding:0;color:#556070}
+.type-switch{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.room-table-wrap{background:#fff;border:1px solid #dde5f1;border-radius:14px;overflow:auto}
+.room-table{width:100%;border-collapse:collapse;min-width:760px}
+.room-table th{background:#f3f6fa;font-size:1.05rem}
+.room-table td,.room-table th{border:1px solid #e5e9ef;padding:.9rem;vertical-align:top}
+.option-type{color:#64748b;margin:.1rem 0}.free-cancel{color:#0c9b62;font-weight:700}
+.old-price{text-decoration:line-through;color:#7b8798;margin:0}.new-price{color:#ef5b16;font-size:2rem;margin:0;font-weight:800}
+.remaining{color:#dc2626;font-weight:700}
+
+@media (max-width:980px){
+  .detail-search-strip{grid-template-columns:1fr}
+  .photo-collage{grid-template-columns:1fr 1fr}
+  .photo-collage .main{grid-column:1/-1;height:240px;grid-row:auto}
+  .price-floating{flex-direction:column;align-items:flex-start;margin-top:.3rem}.price-action{text-align:left}
+  .detail-info-grid{grid-template-columns:1fr}
+  .room-type-layout{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .search-box strong{font-size:.95rem}
+  .detail-tabs{gap:.8rem}
+  .room-size{font-size:1.3rem}
+  .new-price{font-size:1.4rem}
+  .type-sidebar img{height:180px}
+}
