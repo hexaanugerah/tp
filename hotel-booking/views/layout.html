@@ -1,0 +1,60 @@
+{{define "layout"}}
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Title}} | GoStay</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="{{if .ShowLoginPopup}}login-overlay-open{{end}}">
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="/">GoStay</a>
+      <nav>
+        <a href="/">Hotel</a>
+        <a href="/recommendations">Rekomendasi</a>
+        <a href="/dashboard">Booking Saya</a>
+        <a href="/login">Login</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container page-content {{if .ShowLoginPopup}}page-content-blur{{end}}">
+    {{template "content" .}}
+  </main>
+
+  {{if .ShowLoginPopup}}
+  <div class="floating-login-overlay">
+    <section class="floating-login-card">
+      <header class="login-offer-head">
+        <h2>Ada penawaran yang kamu mungkin suka!</h2>
+        <span>✨</span>
+      </header>
+
+      <a class="social-btn social-google" href="/auth/google/login"><span>G</span>Google</a>
+      <div class="social-row">
+        <button class="social-btn" type="button"><span></span>Apple</button>
+        <button class="social-btn" type="button"><span>f</span>Facebook</button>
+      </div>
+
+      <details class="login-alt" open>
+        <summary>Metode lain</summary>
+        <form method="post" action="/login" class="form-grid">
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <select name="role" required>
+            <option value="user">Pengguna</option>
+            <option value="admin">Admin</option>
+            <option value="hotel_staff">Staff Hotel</option>
+          </select>
+          <button type="submit">Masuk</button>
+        </form>
+      </details>
+
+      <p class="login-note">Harga lebih rendah dan reward menanti. Dapatkan saat masuk ke akunmu.</p>
+    </section>
+  </div>
+  {{end}}
+</body>
+</html>
+{{end}}

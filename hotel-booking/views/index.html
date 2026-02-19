@@ -1,0 +1,144 @@
+{{define "content"}}
+<section class="home-search-bar">
+  <form method="get" class="home-search-grid">
+    <label>
+      Kota, tujuan, atau nama hotel
+      <input name="q" placeholder="Kota, hotel, tempat wisata" value="{{.Query}}">
+    </label>
+    <label>
+      Tanggal Check-in & Check-out
+      <input name="date" value="Kam, 19 Feb 2026 - Jum, 20 Feb 2026">
+      <small>Durasi: 1 Malam</small>
+    </label>
+    <label>
+      Tamu dan Kamar
+      <input name="guest" value="2 Dewasa, 0 Anak, 1 Kamar">
+    </label>
+    <button type="submit">Cari</button>
+  </form>
+</section>
+
+<section class="city-map-wrap city-map-wrap-upgraded">
+  <article class="city-grid city-grid-upgraded">
+    {{range .CityDeals}}
+    <button type="button" class="dest-card dest-card-upgraded" onclick="openCityModal('city-modal-{{.Name}}')" data-city="{{.Name}}" style="background-image:url('{{.ImageURL}}')">
+      <div>
+        <span class="city-badge">10 Hotel</span>
+        <h3>{{.Name}}</h3>
+        <p class="iconic-name">Ikonik: {{.IconicSpot}}</p>
+        <p>Mulai dari {{.Price}} • pilihan terbaik untuk staycation & business trip.</p>
+      </div>
+    </button>
+
+    <dialog id="city-modal-{{.Name}}" class="city-modal">
+      <div class="hotel-modal-head">
+        <h3>{{.Name}} • 10 Hotel • {{.IconicSpot}}</h3>
+        <button type="button" class="modal-close" onclick="closeCityModal('city-modal-{{.Name}}')">✕</button>
+      </div>
+      <ul>
+        <li>{{.Name}} Premier Stay</li>
+        <li>{{.Name}} Central Hotel</li>
+        <li>{{.Name}} Skyline Suites</li>
+        <li>{{.Name}} Urban Comfort</li>
+        <li>{{.Name}} Garden Inn</li>
+        <li>{{.Name}} Business Hub Hotel</li>
+        <li>{{.Name}} Family Residence</li>
+        <li>{{.Name}} Luxury Grand</li>
+        <li>{{.Name}} Citylight Rooms</li>
+        <li>{{.Name}} Riverside Hotel</li>
+      </ul>
+      <div class="modal-actions">
+        <a class="btn" href="/?city={{.Name}}">Lihat Hotel di {{.Name}}</a>
+      </div>
+    </dialog>
+    {{end}}
+  </article>
+
+  <article class="city-map-card city-map-card-upgraded">
+    <h3>Map Lokasi Destinasi</h3>
+    <div class="map-tool-row">
+      <input id="map-city-input" type="text" placeholder="Cari kota (misal Bandung)">
+      <button type="button" class="btn btn-ghost" onclick="searchMapCity()">Cari Lokasi</button>
+      <button type="button" class="btn" onclick="findNearestCity()">Lokasi Terdekat</button>
+    </div>
+    <iframe id="destination-map" src="https://maps.google.com/maps?q=indonesia%20hotel%20destination&t=&z=4&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p id="nearest-result">Tips: klik "Lokasi Terdekat" untuk rekomendasi kota terdekat dari posisi kamu.</p>
+  </article>
+</section>
+
+<script>
+  const CITY_COORDS = {
+    "Bandung": [-6.9175, 107.6191],
+    "Yogyakarta": [-7.7956, 110.3695],
+    "Bali": [-8.4095, 115.1889],
+    "Singapore": [1.3521, 103.8198],
+    "Kuala Lumpur": [3.139, 101.6869],
+    "Bangkok": [13.7563, 100.5018],
+    "Penang": [5.4164, 100.3327],
+    "Seoul": [37.5665, 126.978],
+    "Tokyo": [35.6762, 139.6503]
+  };
+
+  function setMapLocation(city) {
+    const map = document.getElementById('destination-map');
+    if (!map) return;
+    map.src = `https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=11&ie=UTF8&iwloc=&output=embed`;
+  }
+
+  function searchMapCity() {
+    const input = document.getElementById('map-city-input');
+    if (!input || !input.value.trim()) return;
+    const city = input.value.trim();
+    setMapLocation(city);
+    const text = document.getElementById('nearest-result');
+    if (text) text.textContent = `Menampilkan map untuk: ${city}`;
+  }
+
+  function findNearestCity() {
+    const result = document.getElementById('nearest-result');
+    if (!navigator.geolocation) {
+      if (result) result.textContent = 'Geolocation tidak didukung browser ini.';
+      return;
+    }
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
+      let nearest = null;
+      let best = Number.POSITIVE_INFINITY;
+      Object.entries(CITY_COORDS).forEach(([city, [lat, lon]]) => {
+        const dLat = latitude - lat;
+        const dLon = longitude - lon;
+        const distance = Math.sqrt((dLat * dLat) + (dLon * dLon));
+        if (distance < best) {
+          best = distance;
+          nearest = city;
+        }
+      });
+      if (nearest) {
+        setMapLocation(nearest);
+        if (result) result.textContent = `Kota terdekat terdeteksi: ${nearest}. Menampilkan map dan rekomendasi hotel di kota ini.`;
+        const input = document.getElementById('map-city-input');
+        if (input) input.value = nearest;
+      }
+    }, () => {
+      if (result) result.textContent = 'Izin lokasi ditolak. Kamu tetap bisa cari kota manual.';
+    });
+  }
+
+  function openCityModal(id) {
+    const modal = document.getElementById(id);
+    if (modal && typeof modal.showModal === 'function') modal.showModal();
+  }
+
+  function closeCityModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.close();
+  }
+
+  document.querySelectorAll('.dest-card-upgraded').forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      const city = card.getAttribute('data-city');
+      if (city) setMapLocation(city);
+    });
+  });
+</script>
+{{end}}
