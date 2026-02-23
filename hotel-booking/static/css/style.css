@@ -2,7 +2,10 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top right,#dbeafe 0%,#eef6ff 45%,#f8fbff 100%);color:var(--text)}
 .container{padding:1rem 1.2rem 3rem;max-width:1240px;margin:auto}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:.95rem 1.4rem;position:sticky;top:0;z-index:30;border-bottom:1px solid #c7d8f5}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:.95rem 1.4rem;position:sticky;top:0;z-index:40;border-bottom:1px solid #c7d8f5;transition:transform .28s ease,opacity .28s ease}
+.navbar.nav-hidden{transform:translateY(-120%);opacity:.0}
+.navbar.nav-reveal{transform:translateY(0);opacity:1}
+.nav-pull-zone{position:fixed;top:0;left:0;right:0;height:22px;z-index:39;background:transparent}
 .glass{backdrop-filter:blur(14px);background:#ffffffcc}
 .logo{font-weight:800;letter-spacing:.4px;color:#0f172a;text-decoration:none}
 .logo span{color:var(--pri)}

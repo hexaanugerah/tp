@@ -17,15 +17,62 @@ window.onclick = (e) => {
 
 (function () {
   const panel = document.getElementById("stickySearch");
-  if (!panel) return;
+  if (panel) {
+    const baseTop = panel.getBoundingClientRect().top + window.scrollY;
+    const onScrollPanel = () => {
+      if (window.scrollY > baseTop - 80) panel.classList.add("nav-pinned");
+      else panel.classList.remove("nav-pinned");
+    };
+    window.addEventListener("scroll", onScrollPanel, { passive: true });
+    onScrollPanel();
+  }
 
-  const baseTop = panel.getBoundingClientRect().top + window.scrollY;
+  const nav = document.getElementById("mainNavbar");
+  const pullZone = document.getElementById("navPullZone");
+  if (!nav) return;
 
-  const onScroll = () => {
-    if (window.scrollY > baseTop - 80) panel.classList.add("nav-pinned");
-    else panel.classList.remove("nav-pinned");
+  const hideNav = () => {
+    nav.classList.add("nav-hidden");
+    nav.classList.remove("nav-reveal");
+  };
+  const showNav = () => {
+    nav.classList.remove("nav-hidden");
+    nav.classList.add("nav-reveal");
   };
 
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  const onScrollNav = () => {
+    if (window.scrollY <= 8) {
+      showNav();
+    } else {
+      hideNav();
+    }
+  };
+
+  let startY = null;
+  const start = (y) => {
+    if (window.scrollY > 8) startY = y;
+  };
+  const move = (y) => {
+    if (startY == null) return;
+    if (y - startY > 42) {
+      showNav();
+      startY = null;
+    }
+  };
+  const end = () => {
+    startY = null;
+  };
+
+  if (pullZone) {
+    pullZone.addEventListener("mousedown", (e) => start(e.clientY));
+    window.addEventListener("mousemove", (e) => move(e.clientY));
+    window.addEventListener("mouseup", end);
+
+    pullZone.addEventListener("touchstart", (e) => start(e.touches[0].clientY), { passive: true });
+    window.addEventListener("touchmove", (e) => move(e.touches[0].clientY), { passive: true });
+    window.addEventListener("touchend", end, { passive: true });
+  }
+
+  window.addEventListener("scroll", onScrollNav, { passive: true });
+  onScrollNav();
 })();
