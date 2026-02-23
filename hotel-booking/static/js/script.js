@@ -17,12 +17,19 @@ window.onclick = (e) => {
 
 (function () {
   const panel = document.getElementById("stickySearch");
-  const brand = document.getElementById("brandDragHandle");
   const resetPinnedBtn = document.getElementById("resetPinnedBtn");
-  if (!panel || !brand) return;
+  const topPullZone = document.getElementById("topPullZone");
+  if (!panel) return;
+
+  const baseTop = panel.getBoundingClientRect().top + window.scrollY;
 
   const pinPanel = () => panel.classList.add("nav-pinned");
   const unpinPanel = () => panel.classList.remove("nav-pinned");
+
+  const onScroll = () => {
+    if (window.scrollY > baseTop - 80) pinPanel();
+    else unpinPanel();
+  };
 
   if (resetPinnedBtn) {
     resetPinnedBtn.addEventListener("click", () => {
@@ -33,7 +40,7 @@ window.onclick = (e) => {
 
   let startY = null;
   const start = (y) => {
-    startY = y;
+    if (window.scrollY <= 5) startY = y;
   };
   const move = (y) => {
     if (startY == null) return;
@@ -46,11 +53,16 @@ window.onclick = (e) => {
     startY = null;
   };
 
-  brand.addEventListener("mousedown", (e) => start(e.clientY));
-  window.addEventListener("mousemove", (e) => move(e.clientY));
-  window.addEventListener("mouseup", end);
+  if (topPullZone) {
+    topPullZone.addEventListener("mousedown", (e) => start(e.clientY));
+    window.addEventListener("mousemove", (e) => move(e.clientY));
+    window.addEventListener("mouseup", end);
 
-  brand.addEventListener("touchstart", (e) => start(e.touches[0].clientY), { passive: true });
-  window.addEventListener("touchmove", (e) => move(e.touches[0].clientY), { passive: true });
-  window.addEventListener("touchend", end, { passive: true });
+    topPullZone.addEventListener("touchstart", (e) => start(e.touches[0].clientY), { passive: true });
+    window.addEventListener("touchmove", (e) => move(e.touches[0].clientY), { passive: true });
+    window.addEventListener("touchend", end, { passive: true });
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 })();

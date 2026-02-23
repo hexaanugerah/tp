@@ -20,7 +20,8 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circ
 .search-panel{background:#0f172a;border-top:3px solid #334155;padding:.85rem 1rem;display:grid;grid-template-columns:1.35fr 1fr 1fr auto;gap:.6rem;align-items:end;max-width:1240px;margin:.5rem auto 0 auto;border-radius:12px;position:relative;z-index:10;transition:all .25s ease}
 .search-panel-top{display:none;grid-column:1/-1;color:#e2e8f0;justify-content:space-between;align-items:center}
 .filter-mini{background:transparent;border:1px solid #64748b;color:#e2e8f0;border-radius:10px;padding:.24rem .55rem;font-weight:700;cursor:pointer}
-.search-panel.nav-pinned{position:fixed;left:0;right:0;top:66px;max-width:none;border-radius:0;margin:0;z-index:35}
+.search-panel.nav-pinned{position:fixed;left:0;right:0;top:66px;max-width:none;border-radius:0;margin:0;z-index:35;box-shadow:0 8px 20px #0b122044}
+.top-pull-zone{position:fixed;top:0;left:0;right:0;height:22px;z-index:34;background:transparent}
 .search-panel.nav-pinned .search-panel-top{display:flex}
 .search-item{display:flex;flex-direction:column;gap:.25rem}
 
@@ -56,8 +57,10 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circ
 .price{color:#1d4ed8;font-weight:700}
 .btn{display:inline-block;padding:.48rem .82rem;border:1px solid #bfdbfe;border-radius:10px;color:#1e293b;text-decoration:none;transition:.2s;background:#fff}
 .btn:hover{transform:translateY(-1px);background:#eff6ff}
-.btn-primary{background:linear-gradient(135deg,var(--pri),#38bdf8);border:none;color:#fff;font-weight:700}
+.btn-primary{background:linear-gradient(135deg,var(--pri),#38bdf8);border:none;color:#ffffff !important;font-weight:800;box-shadow:0 6px 16px #3b82f633}
 .btn-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.hotel-card .btn{background:#fff}
+.hotel-card .btn-primary{background:linear-gradient(135deg,#2563eb,#38bdf8)!important;color:#fff!important;opacity:1}
 .hover-up{transition:all .24s ease}
 .hover-up:hover{transform:translateY(-7px) scale(1.02);box-shadow:0 16px 26px #bfd3f799}
 .modal{display:none;position:fixed;inset:0;background:#33415555;padding:1rem}
