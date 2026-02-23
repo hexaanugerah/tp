@@ -1,0 +1,96 @@
+:root{--bg:#f4f8ff;--bg2:#e9f2ff;--card:#ffffff;--text:#1f2937;--muted:#5b6473;--pri:#2563eb;--sec:#06b6d4}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top right,#dbeafe 0%,#eef6ff 45%,#f8fbff 100%);color:var(--text)}
+.container{padding:1rem 1.2rem 3rem;max-width:1240px;margin:auto}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:.95rem 1.4rem;position:sticky;top:0;z-index:30;border-bottom:1px solid #c7d8f5}
+.glass{backdrop-filter:blur(14px);background:#ffffffcc}
+.logo{font-weight:800;letter-spacing:.4px;color:#0f172a;text-decoration:none}
+.logo span{color:var(--pri)}
+.menu{display:flex;gap:.4rem;align-items:center}
+.menu a{color:#1e293b;text-decoration:none;margin:.2rem;padding:.45rem .7rem;border-radius:8px}
+.menu a:hover{background:#e5efff}
+.menu-cta{background:linear-gradient(120deg,var(--pri),#38bdf8)!important;color:#fff!important;font-weight:700}
+
+.home-hero{margin-bottom:.6rem}
+.hero-cover{height:240px;border-radius:20px;background:url("https://picsum.photos/seed/resorthero/1400/420") center/cover no-repeat;position:relative;overflow:hidden}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,#00000066,#00000033);padding:2rem;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.hero-overlay h1{margin:0 0 .45rem 0;font-size:2.5rem;line-height:1.15}
+.hero-overlay p{margin:0;font-size:1.15rem;color:#eef6ff}
+
+.search-panel{background:#0f172a;border-top:3px solid #334155;padding:.85rem 1rem;display:grid;grid-template-columns:1.35fr 1fr 1fr auto;gap:.6rem;align-items:end;max-width:1240px;margin:.5rem auto 0 auto;border-radius:12px;position:relative;z-index:10;transition:all .25s ease}
+.search-panel-top{display:none;grid-column:1/-1;color:#e2e8f0;justify-content:space-between;align-items:center}
+.filter-mini{background:transparent;border:1px solid #64748b;color:#e2e8f0;border-radius:10px;padding:.24rem .55rem;font-weight:700;cursor:pointer}
+.search-panel.nav-pinned{position:fixed;left:0;right:0;top:66px;max-width:none;border-radius:0;margin:0;z-index:35}
+.search-panel.nav-pinned .search-panel-top{display:flex}
+.search-item{display:flex;flex-direction:column;gap:.25rem}
+
+.search-item label{font-weight:700;font-size:.85rem;color:#e2e8f0}
+.search-item input,.search-item select{border:1px solid #475569;border-radius:10px;padding:.65rem .75rem;font-size:1rem;background:#f8fafc;color:#111827}
+.search-btn{height:46px;min-width:160px;border-radius:999px;font-weight:800}
+
+.city-section{margin:1.2rem 0}
+.city-section h2{margin:0 0 .85rem 0;color:#0f172a}
+.city-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+.city-card{min-height:180px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end;box-shadow:0 10px 24px #c4d7f566;text-decoration:none}
+.city-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#00000022,#00000066)}
+.city-card div{position:relative;color:#fff;padding:1rem}
+.city-card h3{margin:0 0 .2rem 0;font-size:2rem}
+.city-card p{margin:0;font-size:1.05rem}
+
+.facts-section,.faq-section{background:#eef2f7;border:1px solid #d4dbe5;border-radius:14px;padding:1.2rem;margin:1rem 0}
+.facts-section h2,.faq-section h2{margin:.1rem 0 .55rem 0;font-size:2.1rem}
+.facts-sub{margin:0 0 1rem 0;color:#374151}
+.facts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.fact-card{background:#fff;border:1px solid #d6dde9;border-radius:12px;padding:1rem}
+.fact-card h4{margin:0 0 .5rem 0;font-size:1.05rem}
+.fact-card strong{font-size:2rem}
+.faq-item{border-bottom:1px solid #cbd5e1;padding:.2rem 0}
+.faq-item summary{list-style:none;cursor:pointer;padding:.85rem 0;font-size:1.15rem;font-weight:600}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item p{margin:0 0 .85rem 0;color:#4b5563}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 10px 24px #d7e3f888;border:1px solid #d8e5fb}
+.card img{width:100%;height:180px;object-fit:cover}
+.card-body{padding:.95rem}
+.price{color:#1d4ed8;font-weight:700}
+.btn{display:inline-block;padding:.48rem .82rem;border:1px solid #bfdbfe;border-radius:10px;color:#1e293b;text-decoration:none;transition:.2s;background:#fff}
+.btn:hover{transform:translateY(-1px);background:#eff6ff}
+.btn-primary{background:linear-gradient(135deg,var(--pri),#38bdf8);border:none;color:#fff;font-weight:700}
+.btn-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.hover-up{transition:all .24s ease}
+.hover-up:hover{transform:translateY(-7px) scale(1.02);box-shadow:0 16px 26px #bfd3f799}
+.modal{display:none;position:fixed;inset:0;background:#33415555;padding:1rem}
+.modal-content{margin:8% auto;background:#fff;color:#111;padding:1rem;max-width:460px;border-radius:14px}
+.modal-close{cursor:pointer;float:right}
+.panel{padding:1rem}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.map,.floor-map{width:100%;height:220px;border:1px solid #dbeafe;border-radius:10px}
+.pill{background:#eff6ff;padding:.2rem .45rem;border-radius:20px;margin-right:.2rem;display:inline-block;color:#1e3a8a}
+.type-tabs{display:flex;gap:.5rem;margin:1rem 0;flex-wrap:wrap}
+.tab{padding:.5rem .8rem;background:#eaf2ff;border-radius:8px;color:#1e3a8a;text-decoration:none;border:1px solid #cfe0ff}
+.form-card{display:grid;gap:.6rem;max-width:460px;background:#fff;padding:1rem;border-radius:12px;border:1px solid #dbeafe;box-shadow:0 8px 20px #d7e3f866}
+.form-card input,.form-card select{padding:.58rem;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#0f172a}
+.success{color:#16a34a}
+.footer{text-align:center;padding:1rem;background:#ffffff;margin-top:2rem;border-top:1px solid #dbeafe;color:#475569}
+
+.mega-footer{background:#0b3570;color:#e5efff;border-top:none;text-align:left;padding:2.2rem 1.2rem}
+.footer-wrap{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:1.6rem}
+.footer-wrap section{display:flex;flex-direction:column;gap:.38rem}
+.footer-wrap h3{margin:.15rem 0 .45rem 0;color:#ffffff;font-size:1.25rem}
+.footer-wrap a{color:#d6e7ff;text-decoration:none;font-size:.98rem}
+.footer-wrap a:hover{text-decoration:underline}
+.brand-name{font-size:3rem;line-height:1;margin:0 0 .8rem 0;color:#fff}
+.cert-row{margin:.2rem 0 1rem 0;color:#bdd5ff}
+.partner-btn{display:inline-block;width:max-content;background:linear-gradient(120deg,#1d9bf0,#22c1ff);padding:.65rem 1rem;border-radius:999px;color:#fff!important;font-weight:700;text-decoration:none!important;margin-bottom:1rem}
+.payment-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin-top:.35rem}
+.payment-grid span{background:#f8fbff;color:#174078;border-radius:8px;padding:.55rem .35rem;text-align:center;font-weight:700;font-size:.84rem}
+.follow-title{margin-top:1.1rem!important}
+.social-list a{display:block;padding:.1rem 0}
+.download-title{margin-top:1.1rem!important}
+.app-btn{background:#071d42;border:1px solid #2e5ca2;color:#fff;border-radius:10px;padding:.58rem .8rem;width:max-content;margin-bottom:.45rem}
+
+@media (max-width:920px){.search-panel{grid-template-columns:1fr 1fr 1fr}.search-panel.nav-pinned{top:66px}.search-btn{grid-column:1/-1}.city-grid,.facts-grid{grid-template-columns:1fr 1fr}.footer-wrap{grid-template-columns:1fr 1fr}}
+@media (max-width:768px){.container{padding:.75rem}.hero-cover{height:210px}.hero-overlay{padding:1.1rem}.hero-overlay h1{font-size:1.65rem}.hero-overlay p{font-size:1rem}.search-panel{grid-template-columns:1fr;padding:.6rem}.search-panel.nav-pinned{top:58px}.search-btn{width:100%}.city-grid,.facts-grid{grid-template-columns:1fr}.city-card{min-height:160px}.city-card h3{font-size:1.7rem}.faq-item summary{font-size:1rem}.split{grid-template-columns:1fr}.navbar{padding:.65rem .8rem}.menu{flex-wrap:wrap;justify-content:flex-end}.menu a{padding:.38rem .5rem;font-size:.9rem}.footer-wrap{grid-template-columns:1fr}.brand-name{font-size:2.2rem}.payment-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.city-hotels-head{margin-bottom:1rem}

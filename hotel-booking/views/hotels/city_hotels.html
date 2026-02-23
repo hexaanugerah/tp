@@ -1,0 +1,33 @@
+{{define "content"}}
+<section class="city-hotels-head card panel">
+  <h2>Daftar Hotel di {{.City}}</h2>
+  <p>Masing-masing kota berisi 10 hotel. Pilih hotel untuk lihat detail dan tipe kamar.</p>
+  <a class="btn" href="/">← Kembali ke Beranda</a>
+</section>
+
+<section id="list-hotel" class="grid hotels-grid">
+{{range .Hotels}}
+<article class="card hotel-card hover-up" onclick="openHotelModal('{{.Name}}','{{.Description}}','{{.City}}')">
+  <img src="{{.Image}}" alt="{{.Name}}" />
+  <div class="card-body">
+    <h3>{{.Name}}</h3>
+    <p>{{.City}} • ⭐ {{.Rating}}</p>
+    <p class="price">Dari Rp {{.PriceStart}} / malam</p>
+    <div class="btn-row">
+      <a class="btn" href="/hotel?id={{.ID}}">Lihat Detail</a>
+      <a class="btn btn-primary" href="/rooms?hotel_id={{.ID}}">Pilih Tipe Kamar</a>
+    </div>
+  </div>
+</article>
+{{end}}
+</section>
+
+<div id="hotelModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">✖</span>
+    <h3 id="mTitle"></h3>
+    <p id="mDesc"></p>
+    <p id="mCity"></p>
+  </div>
+</div>
+{{end}}

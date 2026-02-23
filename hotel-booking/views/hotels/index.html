@@ -1,0 +1,71 @@
+{{define "content"}}
+<section class="home-hero">
+  <div class="hero-cover">
+    <div class="hero-overlay">
+      <h1>Pilih Kota Dulu, Baru Pilih Hotel</h1>
+      <p>Beranda hanya menampilkan kota. Daftar hotel ada di halaman masing-masing kota.</p>
+    </div>
+  </div>
+</section>
+
+<form id="stickySearch" class="search-panel" method="get" action="/city-hotels">
+  <div class="search-panel-top">
+    <strong>Filter Pencarian</strong>
+    <button id="resetPinnedBtn" type="button" class="filter-mini">Filter ▾</button>
+  </div>
+  <div class="search-item">
+    <label>Pilih Kota Hotel</label>
+    <select name="name">
+      {{range .Cities}}
+      <option value="{{.}}">{{.}}</option>
+      {{end}}
+    </select>
+  </div>
+  <div class="search-item">
+    <label>Tanggal Check-in & Check-out</label>
+    <input type="text" value="Sen, 23 Feb 2026 - Sel, 24 Feb 2026" />
+  </div>
+  <div class="search-item">
+    <label>Tamu dan Kamar</label>
+    <input type="text" value="2 Dewasa, 1 Kamar" />
+  </div>
+  <button class="btn btn-primary search-btn" type="submit">SEARCH</button>
+</form>
+
+<section class="city-section">
+  <h2>20 Kota Indonesia Populer</h2>
+  <div class="city-grid">
+    {{range .CityCards}}
+    <a class="city-card" href="/city-hotels?name={{.Name}}" style="background-image:url('{{.ImageURL}}')"><div><h3>{{.Name}}</h3><p>10 Hotel di {{.Name}} mulai dari Rp {{.PriceFrom}}</p></div></a>
+    {{end}}
+  </div>
+</section>
+
+<section class="facts-section">
+  <h2>Fast facts</h2>
+  <p class="facts-sub">Info singkat yang perlu kamu tahu sebelum memilih hotel.</p>
+  <div class="facts-grid">
+    <article class="fact-card"><h4>🏨 Hotel brands to choose from</h4><strong>60+</strong></article>
+    <article class="fact-card"><h4>📍 Hotel destinations to explore</h4><strong>5,000+</strong></article>
+    <article class="fact-card"><h4>🛏️ Hotels available nationwide</h4><strong>3.2 million</strong></article>
+  </div>
+</section>
+
+<section class="faq-section">
+  <h2>FAQs</h2>
+  <details class="faq-item"><summary>Bagaimana sistem ranking hotel di StayNusa?</summary><p>Urutan hotel berdasarkan rating, ulasan tamu, popularitas, dan value harga.</p></details>
+  <details class="faq-item"><summary>Apakah saya booking langsung lewat StayNusa?</summary><p>Ya, proses booking dilakukan di platform kami dengan konfirmasi instan.</p></details>
+  <details class="faq-item"><summary>Bagaimana memastikan harga terbaik?</summary><p>Bandingkan tipe kamar, tanggal, dan promo aktif sebelum checkout.</p></details>
+  <details class="faq-item"><summary>Bagaimana StayNusa membantu perencanaan perjalanan?</summary><p>Kamu bisa pilih kota, filter hotel, lihat fasilitas kamar, lalu lanjut pembayaran.</p></details>
+  <details class="faq-item"><summary>Apakah booking last minute bisa lebih murah?</summary><p>Terkadang iya, terutama saat hotel memberi promo mendadak untuk kamar tersisa.</p></details>
+</section>
+
+<div id="hotelModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">✖</span>
+    <h3 id="mTitle"></h3>
+    <p id="mDesc"></p>
+    <p id="mCity"></p>
+  </div>
+</div>
+{{end}}

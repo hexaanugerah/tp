@@ -1,0 +1,24 @@
+{{define "content"}}
+<h2>Pemilihan Kamar - {{.Hotel.Name}}</h2>
+<div class="type-tabs">
+  <a class="tab" href="/rooms?hotel_id={{.Hotel.ID}}&type=Biasa">Biasa</a>
+  <a class="tab" href="/rooms?hotel_id={{.Hotel.ID}}&type=Deluxe">Deluxe</a>
+  <a class="tab" href="/rooms?hotel_id={{.Hotel.ID}}&type=VIP">VIP</a>
+</div>
+<div class="grid">
+{{range .Rooms}}
+<div class="card room-card">
+  <h3>{{.Name}}</h3>
+  <p>Tipe: {{.Type}} | Kapasitas: {{.Capacity}} orang | Kasur: {{.Beds}}</p>
+  <p>Fasilitas: {{range .Facilities}}<span class="pill">{{.}}</span>{{end}}</p>
+  <iframe class="floor-map" src="{{.FloorPlanURL}}"></iframe>
+  <form action="/booking/create" method="post">
+    <input type="hidden" name="hotel_id" value="{{.HotelID}}" />
+    <input type="hidden" name="room_id" value="{{.ID}}" />
+    <input type="number" name="nights" min="1" value="1" />
+    <button class="btn btn-primary">Booking Sekarang</button>
+  </form>
+</div>
+{{end}}
+</div>
+{{end}}
