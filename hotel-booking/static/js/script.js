@@ -34,10 +34,12 @@ window.onclick = (e) => {
   const hideNav = () => {
     nav.classList.add("nav-hidden");
     nav.classList.remove("nav-reveal");
+    document.body.classList.remove("navbar-visible");
   };
   const showNav = () => {
     nav.classList.remove("nav-hidden");
     nav.classList.add("nav-reveal");
+    document.body.classList.add("navbar-visible");
   };
 
   const onScrollNav = () => {
