@@ -118,7 +118,7 @@ window.onclick = (e) => {
     },
   };
 
-  const openPopup = (key) => {
+  const openPopup = (key, triggerEl) => {
     const data = datasets[key];
     if (!data) return;
     title.textContent = data.title;
@@ -134,14 +134,22 @@ window.onclick = (e) => {
       });
       optionsWrap.appendChild(btn);
     });
+    if (triggerEl) {
+      const rect = triggerEl.getBoundingClientRect();
+      overlay.style.top = `${rect.bottom + 8}px`;
+      overlay.style.left = `${rect.left}px`;
+      overlay.style.width = `${Math.max(rect.width, 320)}px`;
+    }
     overlay.classList.add("open");
   };
 
   document.querySelectorAll(".popup-trigger").forEach((el) => {
-    el.addEventListener("click", () => openPopup(el.dataset.popup));
+    el.addEventListener("click", () => openPopup(el.dataset.popup, el));
   });
   closeBtn.addEventListener("click", () => overlay.classList.remove("open"));
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) overlay.classList.remove("open");
+  document.addEventListener("click", (e) => {
+    const insidePopup = overlay.contains(e.target);
+    const onTrigger = e.target.closest && e.target.closest(".popup-trigger");
+    if (!insidePopup && !onTrigger) overlay.classList.remove("open");
   });
 })();

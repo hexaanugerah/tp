@@ -8,6 +8,36 @@
     <a class="btn" href="/">← Kembali ke Beranda</a>
   </div>
 
+  <div class="results-search-wrap">
+    <form class="search-panel" method="get" action="/city-hotels">
+      <input type="hidden" id="cityInput" name="name" value="{{.City}}" />
+      <input type="hidden" id="dateInput" name="date" value="Sen, 23 Feb 2026 - Sel, 24 Feb 2026" />
+      <input type="hidden" id="guestInput" name="guest" value="2 Dewasa, 1 Kamar" />
+      <div class="search-item">
+        <label>Pilih Kota Hotel</label>
+        <button class="popup-trigger" data-popup="city" type="button" id="cityTrigger">{{.City}}</button>
+      </div>
+      <div class="search-item">
+        <label>Tanggal Check-in & Check-out</label>
+        <button class="popup-trigger" data-popup="date" type="button" id="dateTrigger">Sen, 23 Feb 2026 - Sel, 24 Feb 2026</button>
+      </div>
+      <div class="search-item">
+        <label>Tamu dan Kamar</label>
+        <button class="popup-trigger" data-popup="guest" type="button" id="guestTrigger">2 Dewasa, 1 Kamar</button>
+      </div>
+      <button class="btn btn-primary search-btn" type="submit">SEARCH</button>
+    </form>
+
+    <div id="searchPopup" class="search-popup-overlay">
+      <div class="search-popup-card">
+        <h3 id="popupTitle">Pilih Opsi</h3>
+        <div id="popupOptions" class="popup-options"></div>
+        <button type="button" class="btn" id="closePopupBtn">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+
   <section class="sort-tabs" aria-label="sorting tabs">
     <button class="tab-btn active" type="button">Recommended</button>
     <button class="tab-btn" type="button">Top reviews</button>
