@@ -81,67 +81,131 @@ window.onclick = (e) => {
   const closeBtn = document.getElementById("closePopupBtn");
 
   const cityInput = document.getElementById("cityInput");
+  const checkinInput = document.getElementById("checkinInput");
+  const checkoutInput = document.getElementById("checkoutInput");
   const dateInput = document.getElementById("dateInput");
   const guestInput = document.getElementById("guestInput");
   const cityTrigger = document.getElementById("cityTrigger");
-  const dateTrigger = document.getElementById("dateTrigger");
+  const checkinTrigger = document.getElementById("checkinTrigger");
+  const checkoutTrigger = document.getElementById("checkoutTrigger");
   const guestTrigger = document.getElementById("guestTrigger");
+
+  const syncDateRange = () => {
+    if (dateInput && checkinInput && checkoutInput) {
+      dateInput.value = `${checkinInput.value} - ${checkoutInput.value}`;
+    }
+    if (checkinTrigger && checkinInput) {
+      checkinTrigger.innerHTML = `<span class="date-caption">Check-in</span><strong>${checkinInput.value}</strong>`;
+    }
+    if (checkoutTrigger && checkoutInput) {
+      checkoutTrigger.innerHTML = `<span class="date-caption">Check-out</span><strong>${checkoutInput.value}</strong>`;
+    }
+  };
 
   const datasets = {
     city: {
       title: "Pilih Kota Hotel",
       values: ["📍 Near me", "Balikpapan", "Jakarta", "Bandung", "Yogyakarta", "Surabaya", "Makassar", "Bali", "Medan"],
       apply: (v) => {
-        cityInput.value = v;
-        cityTrigger.textContent = v;
-      },
-    },
-    date: {
-      title: "Pilih Tanggal",
-      values: [
-        "Sen, 23 Feb 2026 - Sel, 24 Feb 2026",
-        "Rab, 25 Feb 2026 - Kam, 26 Feb 2026",
-        "Jum, 27 Feb 2026 - Sab, 28 Feb 2026",
-      ],
-      apply: (v) => {
-        dateInput.value = v;
-        dateTrigger.textContent = v;
+        if (cityInput) cityInput.value = v;
+        if (cityTrigger) cityTrigger.textContent = v;
       },
     },
     guest: {
       title: "Pilih Tamu dan Kamar",
       values: ["1 Dewasa, 1 Kamar", "2 Dewasa, 1 Kamar", "2 Dewasa, 2 Kamar", "3 Dewasa, 2 Kamar"],
       apply: (v) => {
-        guestInput.value = v;
-        guestTrigger.textContent = v;
+        if (guestInput) guestInput.value = v;
+        if (guestTrigger) guestTrigger.textContent = v;
       },
     },
   };
 
-  const openPopup = (key, triggerEl) => {
-    const data = datasets[key];
-    if (!data) return;
-    title.textContent = data.title;
-    optionsWrap.innerHTML = "";
-    data.values.forEach((v) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "popup-option";
-      btn.textContent = v;
-      btn.addEventListener("click", () => {
-        data.apply(v);
+  const parseDay = (value) => parseInt((value || "01/03/2026").split("/")[0], 10);
+  const buildDate = (day) => `${String(day).padStart(2, "0")}/03/2026`;
+
+  const renderCalendar = (mode) => {
+    title.textContent = mode === "checkin" ? "Pilih Check-in" : "Pilih Check-out";
+    const currentDay = mode === "checkin" ? parseDay(checkinInput?.value) : parseDay(checkoutInput?.value);
+    const prevMonthTail = [23, 24, 25, 26, 27, 28];
+    const days = Array.from({ length: 31 }, (_, i) => i + 1);
+
+    optionsWrap.innerHTML = `
+      <div class="calendar-shell">
+        <div class="calendar-header">
+          <button type="button" class="cal-nav">◀</button>
+          <div class="cal-month">March 2026</div>
+          <button type="button" class="cal-nav">▶</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="popup-foot"><button type="button" id="closeCalBtn">Close</button></div>
+      </div>`;
+
+    const grid = optionsWrap.querySelector("#calendarGrid");
+    prevMonthTail.forEach((d) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "cal-day muted";
+      b.textContent = String(d);
+      grid.appendChild(b);
+    });
+    days.forEach((d) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = `cal-day${d === currentDay ? " selected" : ""}`;
+      b.textContent = String(d);
+      b.addEventListener("click", () => {
+        if (mode === "checkin" && checkinInput) {
+          checkinInput.value = buildDate(d);
+          if (checkoutInput && parseDay(checkoutInput.value) < d) checkoutInput.value = buildDate(d + 1 <= 31 ? d + 1 : d);
+        }
+        if (mode === "checkout" && checkoutInput) {
+          const inDay = parseDay(checkinInput?.value);
+          checkoutInput.value = buildDate(d < inDay ? inDay + 1 : d);
+        }
+        syncDateRange();
         overlay.classList.remove("open");
       });
-      optionsWrap.appendChild(btn);
+      grid.appendChild(b);
     });
+
+    const closeCalBtn = optionsWrap.querySelector("#closeCalBtn");
+    if (closeCalBtn) closeCalBtn.addEventListener("click", () => overlay.classList.remove("open"));
+  };
+
+  const openPopup = (key, triggerEl) => {
+    if (key === "checkin" || key === "checkout") {
+      renderCalendar(key);
+    } else {
+      const data = datasets[key];
+      if (!data) return;
+      title.textContent = data.title;
+      optionsWrap.innerHTML = "";
+      data.values.forEach((v) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "popup-option";
+        btn.textContent = v;
+        btn.addEventListener("click", () => {
+          data.apply(v);
+          overlay.classList.remove("open");
+        });
+        optionsWrap.appendChild(btn);
+      });
+    }
+
     if (triggerEl) {
       const rect = triggerEl.getBoundingClientRect();
       overlay.style.top = `${rect.bottom + 8}px`;
-      overlay.style.left = `${rect.left}px`;
-      overlay.style.width = `${Math.max(rect.width, 320)}px`;
+      overlay.style.left = `${Math.max(16, rect.left)}px`;
+      overlay.style.width = `${Math.max(rect.width, 360)}px`;
     }
     overlay.classList.add("open");
   };
+  syncDateRange();
 
   document.querySelectorAll(".popup-trigger").forEach((el) => {
     el.addEventListener("click", () => openPopup(el.dataset.popup, el));

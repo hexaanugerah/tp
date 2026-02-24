@@ -11,15 +11,21 @@
   <div class="results-search-wrap">
     <form class="search-panel" method="get" action="/city-hotels">
       <input type="hidden" id="cityInput" name="name" value="{{.City}}" />
-      <input type="hidden" id="dateInput" name="date" value="Sen, 23 Feb 2026 - Sel, 24 Feb 2026" />
+      <input type="hidden" id="checkinInput" value="03/03/2026" />
+      <input type="hidden" id="checkoutInput" value="04/03/2026" />
+      <input type="hidden" id="dateInput" name="date" value="03/03/2026 - 04/03/2026" />
       <input type="hidden" id="guestInput" name="guest" value="2 Dewasa, 1 Kamar" />
       <div class="search-item">
         <label>Pilih Kota Hotel</label>
         <button class="popup-trigger" data-popup="city" type="button" id="cityTrigger">{{.City}}</button>
       </div>
       <div class="search-item">
-        <label>Tanggal Check-in & Check-out</label>
-        <button class="popup-trigger" data-popup="date" type="button" id="dateTrigger">Sen, 23 Feb 2026 - Sel, 24 Feb 2026</button>
+        <label>Check-in</label>
+        <button class="popup-trigger date-trigger" data-popup="checkin" type="button" id="checkinTrigger"><span class="date-caption">Check-in</span><strong>03/03/2026</strong></button>
+      </div>
+      <div class="search-item">
+        <label>Check-out</label>
+        <button class="popup-trigger date-trigger" data-popup="checkout" type="button" id="checkoutTrigger"><span class="date-caption">Check-out</span><strong>04/03/2026</strong></button>
       </div>
       <div class="search-item">
         <label>Tamu dan Kamar</label>
