@@ -302,3 +302,14 @@ body.navbar-visible .search-panel.nav-pinned{top:66px}
 #facilities.section-gap,#policy.section-gap,#reviews.section-gap{margin-top:1.5rem}
 
 @media (max-width:1200px){.section-separator{margin-top:.8rem}}
+
+/* Rooms nav interactions */
+.rooms-ref-page{gap:1.35rem}
+.rooms-top-nav{position:sticky;top:74px;z-index:36;box-shadow:0 8px 20px #0f172a14;padding-bottom:.95rem}
+.rooms-top-nav .rooms-section-link{position:relative;transition:color .25s ease}
+.rooms-top-nav .rooms-section-link.active{color:#0a66d9}
+.rooms-nav-underline{position:absolute;left:0;bottom:.45rem;height:3px;border-radius:999px;background:#0a66d9;transition:left .3s ease,width .3s ease,opacity .25s ease;opacity:0}
+#location.anchor-section,#facilities.anchor-section,#policy.anchor-section,#reviews.anchor-section{margin-top:1.75rem}
+#location.anchor-section{padding:1.2rem}
+
+@media (max-width:1200px){.rooms-top-nav{top:64px}}

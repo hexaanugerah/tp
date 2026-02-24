@@ -73,6 +73,53 @@ window.onclick = (e) => {
     onScrollNav();
   }
 
+
+  // Rooms page section nav (sticky + scroll spy + smooth underline)
+  const roomsNav = document.getElementById("roomsSectionNav");
+  if (roomsNav) {
+    const navLinks = Array.from(roomsNav.querySelectorAll(".rooms-section-link[href^='#']"));
+    const underline = document.getElementById("roomsNavUnderline");
+    const sections = navLinks
+      .map((l) => document.querySelector(l.getAttribute("href")))
+      .filter(Boolean);
+
+    const setActive = (link) => {
+      navLinks.forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
+      if (!underline) return;
+      const rect = link.getBoundingClientRect();
+      const navRect = roomsNav.getBoundingClientRect();
+      underline.style.left = `${rect.left - navRect.left}px`;
+      underline.style.width = `${rect.width}px`;
+      underline.style.opacity = "1";
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const id = link.getAttribute("href");
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        setActive(link);
+        history.replaceState(null, "", id);
+      });
+    });
+
+    const onScrollSpy = () => {
+      let current = sections[0];
+      sections.forEach((sec) => {
+        if (window.scrollY >= sec.offsetTop - 170) current = sec;
+      });
+      const activeLink = navLinks.find((l) => l.getAttribute("href") === `#${current.id}`);
+      if (activeLink) setActive(activeLink);
+    };
+
+    window.addEventListener("scroll", onScrollSpy, { passive: true });
+    window.addEventListener("resize", onScrollSpy);
+    onScrollSpy();
+  }
+
   // Popup selections for city/date/guest
   const overlay = document.getElementById("searchPopup");
   if (!overlay) return;
