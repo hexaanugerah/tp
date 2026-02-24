@@ -1,0 +1,11 @@
+{{define "content"}}
+<h2>Login Multi Role</h2>
+<form method="post" action="/login" class="form-card">
+  <input name="email" placeholder="Email" required />
+  <input type="password" name="password" placeholder="Password" required />
+  <select name="role"><option value="pengguna">Pengguna</option><option value="staff">Staff Hotel</option><option value="admin">Admin</option></select>
+  <button class="btn btn-primary">Login</button>
+  <a class="btn" target="_blank" href="https://accounts.google.com/o/oauth2/v2/auth">Login dengan Google (OAuth)</a>
+</form>
+<p>Akun demo: admin@hotel.local/admin123, user@hotel.local/user123, staff@hotel.local/staff123.</p>
+{{end}}
