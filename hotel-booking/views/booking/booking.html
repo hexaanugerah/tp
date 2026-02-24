@@ -1,0 +1,195 @@
+{{define "content"}}
+<section class="rooms-ref-page">
+  <div id="roomsSectionNav" class="rooms-top-nav">
+    <a class="rooms-section-link active" href="#overview">Overview</a>
+    <a href="#rooms" class="rooms-section-link">Rooms</a>
+    <a href="#location" class="rooms-section-link">Location</a>
+    <a href="#facilities" class="rooms-section-link">Facilities</a>
+    <a href="#policy" class="rooms-section-link">Policy</a>
+    <a href="#reviews" class="rooms-section-link">Reviews</a>
+    <span class="rooms-top-actions">Copy link · Save Accommodation · <a href="#overview">Back to Top</a></span>
+    <div id="roomsNavUnderline" class="rooms-nav-underline"></div>
+  </div>
+
+  <section id="overview" class="hotel-showcase card anchor-section">
+    <div class="showcase-grid">
+      <img class="hero" src="https://picsum.photos/seed/hotel-night/900/520" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-a/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-b/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-c/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-d/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-e/420/250" alt="Hotel" />
+      <a class="see-photos" href="#">See All Photos</a>
+    </div>
+
+    <div class="hotel-summary">
+      <div>
+        <h2>{{.Hotel.Name}}</h2>
+        <p class="hotel-badges"><span>Hotels</span><span>⭐⭐⭐⭐</span><span>Preferred Partner Plus</span></p>
+      </div>
+      <div class="price-cta">
+        <small>Price/room/night starts from</small>
+        {{if gt (len .Rooms) 0}}<strong>Rp {{(index .Rooms 0).PricePerNight}}</strong>{{else}}<strong>Rp -</strong>{{end}}
+        <a class="btn btn-primary" href="#rooms">Select Room</a>
+      </div>
+    </div>
+
+    <div class="low-stock">⏰ Don't miss out! Only <b>3 room(s) left</b> for the lowest price.</div>
+
+    <section class="insight-grid">
+      <article class="insight-card">
+        <h3>8,8/10 <span>Very Good</span></h3>
+        <p>5.281 reviews · Staff friendly · Clean room · Great location</p>
+      </article>
+      <article class="insight-card">
+        <h3>In the Area</h3>
+        <p>Jalan R.E. Martadinata 68, Bandung</p>
+        <ul><li>Bandung Station — 2.2 km</li><li>Trans Studio — 2.7 km</li></ul>
+      </article>
+      <article class="insight-card">
+        <h3>Main Facilities</h3>
+        <p>AC · Parking · Restaurant · Elevator · WiFi · 24-Hour Front Desk</p>
+      </article>
+    </section>
+  </section>
+
+  <section id="rooms" class="rooms-block card anchor-section">
+    <h3>Available Room Types in {{.Hotel.Name}}</h3>
+    <div class="rooms-guarantee">Ketemu harga lebih hemat? Klaim selisihnya dengan Best Price Guarantee.</div>
+
+    <div class="room-filter-row">
+      <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Biasa#rooms">Biasa</a>
+      <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Deluxe#rooms">Deluxe</a>
+      <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=VIP#rooms">VIP</a>
+      <span class="type-hint">Filter aktif: {{.Type}}</span>
+    </div>
+
+    {{range .Rooms}}
+    <article class="room-table-card">
+      <div class="room-media">
+        <iframe class="floor-map" src="{{.FloorPlanURL}}"></iframe>
+      </div>
+      <div class="room-option">
+        <p class="muted">{{.Type}} · Room Option</p>
+        <h4>{{.Name}}</h4>
+        <p>1 king bed · {{.Capacity}} guest</p>
+        <div class="chips">{{range .Facilities}}<span>{{.}}</span>{{end}}</div>
+      </div>
+      <div class="room-price-col">
+        <span class="deal">SPECIAL DEALS</span>
+        <small class="strike">Rp {{.PricePerNight}}.000</small>
+        <strong>Rp {{.PricePerNight}}</strong>
+        <small>Exclude taxes & fees</small>
+      </div>
+      <div class="room-book-col">
+        <form action="/booking/create" method="post" class="book-form">
+          <input type="hidden" name="hotel_id" value="{{.HotelID}}" />
+          <input type="hidden" name="room_id" value="{{.ID}}" />
+          <label>Nights</label>
+          <input type="number" name="nights" min="1" value="1" />
+          <button class="btn btn-primary" type="submit">Choose</button>
+        </form>
+      </div>
+    </article>
+    {{end}}
+  </section>
+
+  <section id="location" class="card panel anchor-section info-section">
+    <h3>Location</h3>
+    <p>{{.Hotel.Address}}</p>
+    <iframe class="map" src="{{.Hotel.MapEmbedURL}}"></iframe>
+  </section>
+
+  <div class="section-separator"><span>Facilities</span></div>
+  <section id="facilities" class="card panel anchor-section info-section section-gap themed-section themed-facilities">
+    <h3>All facilities in {{.Hotel.Name}}</h3>
+    <div class="facility-photo-row">
+      <figure><img src="https://picsum.photos/seed/fac-1/420/260" alt="Bar" /><figcaption>Bar, Cafe and Lounge</figcaption></figure>
+      <figure><img src="https://picsum.photos/seed/fac-2/420/260" alt="Pool" /><figcaption>Swimming Pool</figcaption></figure>
+      <figure><img src="https://picsum.photos/seed/fac-3/420/260" alt="Entertainment" /><figcaption>Entertainment Facility</figcaption></figure>
+      <figure><img src="https://picsum.photos/seed/fac-4/420/260" alt="Fitness" /><figcaption>Fitness Center</figcaption></figure>
+      <figure><img src="https://picsum.photos/seed/fac-5/420/260" alt="Hall" /><figcaption>Functional Hall</figcaption></figure>
+      <a class="facility-more" href="#">Lihat lainnya</a>
+    </div>
+    <div class="facility-columns">
+      <div>
+        <h4>Public Facilities</h4>
+        <ul><li>Parking</li><li>Coffee/tea in lobby</li><li>Coffee shop</li><li>Elevator</li><li>24-hour room service</li><li>Restaurant</li></ul>
+      </div>
+      <div>
+        <h4>Hotel Services</h4>
+        <ul><li>Bellhop</li><li>Welcoming drinks</li><li>Concierge</li><li>Front desk</li><li>24-hour Receptionist</li><li>Laundry service</li></ul>
+      </div>
+      <div>
+        <h4>In-room Facilities</h4>
+        <ul><li>Cable TV</li><li>Desk</li><li>Hairdryer</li><li>In-room safe</li><li>Minibar</li><li>Separate shower and tub</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-separator"><span>Policy</span></div>
+  <section id="policy" class="card panel anchor-section info-section section-gap themed-section themed-policy">
+    <div class="policy-layout">
+      <aside class="policy-title">Accommodation Policy & General Information in {{.Hotel.Name}}</aside>
+      <div class="policy-main">
+        <div class="policy-item"><h4>Check-in/Check-out Time</h4><p>Check-in: <b>From 14:00</b> · Check-out: <b>Before 12:00</b></p></div>
+        <div class="policy-item"><h4>Required Documents</h4><p>Upon check-in, bring ID Card/Passport. Soft copy is accepted.</p></div>
+        <div class="policy-item"><h4>Deposit</h4><p>Deposit 0 is required upon check-in. Cash, debit, and credit card accepted.</p></div>
+        <a class="policy-link" href="#">Read All</a>
+        <h4 class="policy-subhead">General Information</h4>
+        <div class="policy-table">
+          <div><span>Popular Facilities</span><b>AC, Restaurant, Swimming Pool, Front Desk, Parking, Elevator, WiFi</b></div>
+          <div><span>Check-In / Check-Out Time</span><b>From 14:00 - to 12:00</b></div>
+          <div><span>Distance to Downtown</span><b>1.99 km</b></div>
+          <div><span>Popular in the Area</span><b>Bandung Station, Trans Studio Bandung</b></div>
+          <div><span>Breakfast Availability</span><b>Yes, hotel has room that provide breakfast</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-policy">
+      <div class="faq-illus"><h4>Frequently asked question in {{.Hotel.Name}}</h4><div>💬💬</div></div>
+      <div class="faq-list">
+        <details><summary>What are available facilities at {{.Hotel.Name}}?</summary><p>Swimming pool, restaurant, parking, and more.</p></details>
+        <details><summary>How much does it cost to stay at {{.Hotel.Name}}?</summary><p>Harga bervariasi berdasarkan tipe kamar dan tanggal.</p></details>
+        <details><summary>What is normal check-in & check-out time?</summary><p>Check-in 14:00 dan check-out 12:00.</p></details>
+        <details><summary>Does {{.Hotel.Name}} provide breakfast?</summary><p>Tersedia opsi kamar dengan sarapan.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-separator"><span>Reviews</span></div>
+  <section id="reviews" class="card panel anchor-section info-section section-gap themed-section themed-reviews">
+    <h3>More Reviews from Other Guests in {{.Hotel.Name}}</h3>
+    <p class="review-sub">Most Recent Photos by Guests in {{.Hotel.Name}}</p>
+    <div class="review-photos">
+      <img src="https://picsum.photos/seed/rev-1/300/220" alt="review" />
+      <img src="https://picsum.photos/seed/rev-2/300/220" alt="review" />
+      <img src="https://picsum.photos/seed/rev-3/300/220" alt="review" />
+      <img src="https://picsum.photos/seed/rev-4/300/220" alt="review" />
+      <div class="review-photo-more">+23<br/>Photos</div>
+    </div>
+
+    <div class="review-score-wrap">
+      <div class="score-box"><strong>8,8</strong><span>Very Good</span><small>From 5.242 reviews</small></div>
+      <div class="score-bars">
+        <div><span>Cleanliness</span><b><i style="width:90%"></i></b><em>9,0</em></div>
+        <div><span>Room Comfort</span><b><i style="width:89%"></i></b><em>8,9</em></div>
+        <div><span>Meal</span><b><i style="width:86%"></i></b><em>8,6</em></div>
+        <div><span>Location</span><b><i style="width:91%"></i></b><em>9,1</em></div>
+      </div>
+    </div>
+
+    <div class="review-tags">
+      <span class="active">All</span><span>Distance to City Center (144)</span><span>Staff Friendliness (137)</span><span>Surroundings (132)</span><span>Bedroom (130)</span>
+    </div>
+
+    <article class="customer-review-card">
+      <div class="review-head"><strong>A***w</strong><span class="badge">10,0/10</span><small>Reviewed 4 day(s) ago</small></div>
+      <p>1st, this by far is the best hotel I've ever stayed at. The price is reasonable, room is big and squeaking clean! I will definitely go here again when I go to Bandung next time.</p>
+      <div class="review-inline-photos"><img src="https://picsum.photos/seed/rp1/160/120" alt="photo" /><img src="https://picsum.photos/seed/rp2/160/120" alt="photo" /></div>
+      <div class="review-reply"><b>Accommodation's Reply</b><p>Thank you so much for your wonderful review!</p></div>
+    </article>
+  </section>
+
+</section>
+{{end}}

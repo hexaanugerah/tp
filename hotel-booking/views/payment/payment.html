@@ -1,0 +1,10 @@
+{{define "content"}}
+<h2>Payment Gateway</h2>
+{{if .Success}}<p class="success">Pembayaran berhasil! Status: {{.Payment.Status}}</p>{{end}}
+<form method="post" action="/payment" class="form-card">
+  <input name="booking_id" placeholder="Booking ID" required />
+  <input name="amount" placeholder="Jumlah" required />
+  <select name="method"><option>Virtual Account</option><option>QRIS</option><option>Credit Card</option><option>E-Wallet</option></select>
+  <button class="btn btn-primary">Bayar</button>
+</form>
+{{end}}
