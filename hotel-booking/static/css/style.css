@@ -27,6 +27,14 @@ body.navbar-visible .search-panel.nav-pinned{top:66px}
 .search-item{display:flex;flex-direction:column;gap:.25rem}
 
 .search-item label{font-weight:700;font-size:.85rem;color:#e2e8f0}
+
+.popup-trigger{border:1px solid #475569;border-radius:10px;padding:.65rem .75rem;font-size:1rem;background:#f8fafc;color:#111827;text-align:left;cursor:pointer}
+.search-popup-overlay{display:none;position:fixed;inset:0;background:#0f172a66;z-index:60;align-items:center;justify-content:center;padding:1rem}
+.search-popup-overlay.open{display:flex}
+.search-popup-card{background:#fff;border-radius:12px;padding:1rem;max-width:520px;width:100%}
+.popup-options{display:grid;gap:.45rem;margin:.8rem 0}
+.popup-options button{padding:.58rem .7rem;border:1px solid #cbd5e1;border-radius:8px;background:#fff;text-align:left;cursor:pointer}
+.popup-options button:hover{background:#eff6ff}
 .search-item input,.search-item select{border:1px solid #475569;border-radius:10px;padding:.65rem .75rem;font-size:1rem;background:#f8fafc;color:#111827}
 .search-btn{height:46px;min-width:160px;border-radius:999px;font-weight:800}
 

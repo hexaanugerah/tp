@@ -9,24 +9,32 @@
 </section>
 
 <form id="stickySearch" class="search-panel" method="get" action="/city-hotels">
+  <input type="hidden" id="cityInput" name="name" value="Balikpapan" />
+  <input type="hidden" id="dateInput" name="date" value="Sen, 23 Feb 2026 - Sel, 24 Feb 2026" />
+  <input type="hidden" id="guestInput" name="guest" value="2 Dewasa, 1 Kamar" />
+
   <div class="search-item">
     <label>Pilih Kota Hotel</label>
-    <select name="name">
-      {{range .Cities}}
-      <option value="{{.}}">{{.}}</option>
-      {{end}}
-    </select>
+    <button class="popup-trigger" data-popup="city" type="button" id="cityTrigger">Balikpapan</button>
   </div>
   <div class="search-item">
     <label>Tanggal Check-in & Check-out</label>
-    <input type="text" value="Sen, 23 Feb 2026 - Sel, 24 Feb 2026" />
+    <button class="popup-trigger" data-popup="date" type="button" id="dateTrigger">Sen, 23 Feb 2026 - Sel, 24 Feb 2026</button>
   </div>
   <div class="search-item">
     <label>Tamu dan Kamar</label>
-    <input type="text" value="2 Dewasa, 1 Kamar" />
+    <button class="popup-trigger" data-popup="guest" type="button" id="guestTrigger">2 Dewasa, 1 Kamar</button>
   </div>
   <button class="btn btn-primary search-btn" type="submit">SEARCH</button>
 </form>
+
+<div id="searchPopup" class="search-popup-overlay">
+  <div class="search-popup-card">
+    <h3 id="popupTitle">Pilih Opsi</h3>
+    <div id="popupOptions" class="popup-options"></div>
+    <button type="button" class="btn" id="closePopupBtn">Tutup</button>
+  </div>
+</div>
 
 <section class="city-section">
   <h2>20 Kota Indonesia Populer</h2>
