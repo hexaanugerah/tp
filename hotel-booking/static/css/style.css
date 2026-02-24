@@ -187,3 +187,53 @@ body.navbar-visible .search-panel.nav-pinned{top:66px}
 .room-book-form input{padding:.5rem .6rem;border:1px solid #cbd5e1;border-radius:8px}
 
 @media (max-width:1080px){.room-modern-card{grid-template-columns:1fr}.room-modern-price{border-left:none;border-top:1px solid #e2e8f0}.rooms-sticky-nav{top:64px}}
+
+.anchor-section{scroll-margin-top:130px}
+.rooms-top-actions a{text-decoration:none;color:#0a66d9}
+.info-section h3{margin:.1rem 0 .55rem 0;font-size:1.7rem}
+.info-section ul{margin:0;padding-left:1.15rem;color:#475569}
+.info-section p{margin:.4rem 0;color:#475569}
+
+.rooms-ref-page{display:grid;gap:1rem;margin-top:.6rem}
+.rooms-top-nav{position:sticky;top:70px;z-index:30;background:#fff;border:1px solid #d9e2ef;border-radius:12px;padding:.85rem 1rem;display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+.rooms-top-nav a{text-decoration:none;color:#5b6473;font-weight:700}
+.rooms-top-nav a.active{color:#0a66d9;border-bottom:3px solid #0a66d9;padding-bottom:.15rem}
+.rooms-top-actions{margin-left:auto;color:#0a66d9;font-weight:700}
+.hotel-showcase{padding:0;overflow:hidden}
+.showcase-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;grid-template-rows:190px 190px;gap:4px;position:relative}
+.showcase-grid img{width:100%;height:100%;object-fit:cover}
+.showcase-grid .hero{grid-row:1/3}
+.see-photos{position:absolute;right:16px;bottom:16px;background:#00000077;color:#fff;text-decoration:none;padding:.55rem .8rem;border-radius:8px;font-weight:700}
+.hotel-summary{display:flex;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;border-top:1px solid #e2e8f0}
+.hotel-summary h2{margin:.1rem 0 .35rem 0;font-size:2.2rem}
+.hotel-badges{display:flex;gap:.45rem;flex-wrap:wrap;margin:0}
+.hotel-badges span{background:#eef4ff;color:#1450a3;padding:.2rem .55rem;border-radius:999px;font-weight:700;font-size:.84rem}
+.price-cta{text-align:right;display:grid;gap:.25rem;align-content:center}
+.price-cta small{color:#64748b}
+.price-cta strong{font-size:2rem;color:#ff5d1f}
+.low-stock{margin:.2rem 1rem 1rem 1rem;background:#d9efff;color:#13324c;border-radius:999px;padding:.65rem .95rem;font-weight:700}
+.insight-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;padding:0 1rem 1rem 1rem}
+.insight-card{background:#fff;border:1px solid #dce6f3;border-radius:12px;padding:1rem}
+.insight-card h3{margin:.1rem 0 .45rem 0;font-size:1.7rem}
+.insight-card h3 span{font-size:1.05rem;color:#334155}
+.insight-card p,.insight-card li{color:#475569}
+.rooms-block{padding:1rem}
+.rooms-block h3{margin:.1rem 0 .75rem 0;font-size:2rem}
+.rooms-guarantee{background:#1572bc;color:#fff;padding:.8rem 1rem;border-radius:10px;font-weight:700;margin-bottom:.9rem}
+.room-filter-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:.85rem}
+.room-table-card{display:grid;grid-template-columns:260px 1.2fr .7fr .7fr;border:1px solid #dce4ef;border-radius:12px;overflow:hidden;margin-bottom:.8rem;background:#fff}
+.room-media{padding:.7rem;background:#ecf4ff}
+.room-option{padding:.85rem}
+.room-option .muted{margin:0;color:#64748b}
+.room-option h4{margin:.35rem 0 .3rem 0;font-size:1.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.45rem}
+.chips span{background:#eef2ff;color:#1e3a8a;border-radius:999px;padding:.22rem .55rem;font-size:.82rem}
+.room-price-col{padding:.85rem;border-left:1px solid #e2e8f0;display:flex;flex-direction:column;align-items:flex-end;justify-content:center}
+.deal{background:#0e9f6e;color:#fff;border-radius:999px;padding:.2rem .55rem;font-size:.8rem;font-weight:700}
+.strike{text-decoration:line-through;color:#64748b;margin-top:.4rem}
+.room-price-col strong{color:#ff5d1f;font-size:1.8rem;line-height:1.2}
+.room-book-col{padding:.85rem;border-left:1px solid #e2e8f0;display:flex;align-items:center}
+.book-form{display:grid;gap:.35rem;width:100%}
+.book-form input{padding:.48rem .55rem;border:1px solid #cad6e6;border-radius:8px}
+
+@media (max-width:1100px){.showcase-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 170px 170px 170px}.showcase-grid .hero{grid-column:1/3;grid-row:auto}.insight-grid{grid-template-columns:1fr}.room-table-card{grid-template-columns:1fr}.room-price-col,.room-book-col{border-left:none;border-top:1px solid #e2e8f0}.rooms-top-actions{margin-left:0;width:100%}}

@@ -1,57 +1,123 @@
 {{define "content"}}
-<section class="rooms-page">
-  <div class="rooms-sticky-nav">
-    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Overview</a>
-    <a class="rooms-nav-link active" href="#">Rooms</a>
-    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Location</a>
-    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Facilities</a>
-    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Policy</a>
-    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Reviews</a>
+<section class="rooms-ref-page">
+  <div class="rooms-top-nav">
+    <a class="active" href="#overview">Overview</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#location">Location</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#policy">Policy</a>
+    <a href="#reviews">Reviews</a>
+    <span class="rooms-top-actions">Copy link · Save Accommodation · <a href="#overview">Back to Top</a></span>
   </div>
 
-  <div class="rooms-hero card panel">
-    <div>
-      <h2>Available Room Types in {{.Hotel.Name}}</h2>
-      <p>Pilih tipe kamar terbaik sesuai kebutuhan perjalananmu.</p>
+  <section id="overview" class="hotel-showcase card anchor-section">
+    <div class="showcase-grid">
+      <img class="hero" src="https://picsum.photos/seed/hotel-night/900/520" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-a/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-b/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-c/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-d/420/250" alt="Hotel" />
+      <img src="https://picsum.photos/seed/hotel-e/420/250" alt="Hotel" />
+      <a class="see-photos" href="#">See All Photos</a>
     </div>
-    <a class="btn" href="/hotel?id={{.Hotel.ID}}">← Kembali ke Detail Hotel</a>
-  </div>
 
-  <div class="room-type-pills">
-    <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Biasa">Biasa</a>
-    <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Deluxe">Deluxe</a>
-    <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=VIP">VIP</a>
-    <span class="type-hint">Filter aktif: {{.Type}}</span>
-  </div>
+    <div class="hotel-summary">
+      <div>
+        <h2>{{.Hotel.Name}}</h2>
+        <p class="hotel-badges"><span>Hotels</span><span>⭐⭐⭐⭐</span><span>Preferred Partner Plus</span></p>
+      </div>
+      <div class="price-cta">
+        <small>Price/room/night starts from</small>
+        {{if gt (len .Rooms) 0}}<strong>Rp {{(index .Rooms 0).PricePerNight}}</strong>{{else}}<strong>Rp -</strong>{{end}}
+        <a class="btn btn-primary" href="#rooms">Select Room</a>
+      </div>
+    </div>
 
-  <div class="rooms-banner">💡 Ketemu harga lebih hemat? Klaim selisihnya dengan Best Price Guarantee.</div>
+    <div class="low-stock">⏰ Don't miss out! Only <b>3 room(s) left</b> for the lowest price.</div>
 
-  <section class="rooms-list-modern">
+    <section class="insight-grid">
+      <article class="insight-card">
+        <h3>8,8/10 <span>Very Good</span></h3>
+        <p>5.281 reviews · Staff friendly · Clean room · Great location</p>
+      </article>
+      <article class="insight-card">
+        <h3>In the Area</h3>
+        <p>Jalan R.E. Martadinata 68, Bandung</p>
+        <ul><li>Bandung Station — 2.2 km</li><li>Trans Studio — 2.7 km</li></ul>
+      </article>
+      <article class="insight-card">
+        <h3>Main Facilities</h3>
+        <p>AC · Parking · Restaurant · Elevator · WiFi · 24-Hour Front Desk</p>
+      </article>
+    </section>
+  </section>
+
+  <section id="rooms" class="rooms-block card anchor-section">
+    <h3>Available Room Types in {{.Hotel.Name}}</h3>
+    <div class="rooms-guarantee">Ketemu harga lebih hemat? Klaim selisihnya dengan Best Price Guarantee.</div>
+
+    <div class="room-filter-row">
+      <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Biasa#rooms">Biasa</a>
+      <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Deluxe#rooms">Deluxe</a>
+      <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=VIP#rooms">VIP</a>
+      <span class="type-hint">Filter aktif: {{.Type}}</span>
+    </div>
+
     {{range .Rooms}}
-    <article class="room-modern-card">
-      <div class="room-modern-media">
+    <article class="room-table-card">
+      <div class="room-media">
         <iframe class="floor-map" src="{{.FloorPlanURL}}"></iframe>
       </div>
-      <div class="room-modern-info">
-        <h3>{{.Name}}</h3>
-        <p class="room-meta">{{.Type}} · {{.Capacity}} tamu · {{.Beds}} kasur</p>
-        <div class="tag-row">
-          {{range .Facilities}}<span>{{.}}</span>{{end}}
-        </div>
+      <div class="room-option">
+        <p class="muted">{{.Type}} · Room Option</p>
+        <h4>{{.Name}}</h4>
+        <p>1 king bed · {{.Capacity}} guest</p>
+        <div class="chips">{{range .Facilities}}<span>{{.}}</span>{{end}}</div>
       </div>
-      <div class="room-modern-price">
-        <small>Price/room/night starts from</small>
+      <div class="room-price-col">
+        <span class="deal">SPECIAL DEALS</span>
+        <small class="strike">Rp {{.PricePerNight}}.000</small>
         <strong>Rp {{.PricePerNight}}</strong>
-        <form action="/booking/create" method="post" class="room-book-form">
+        <small>Exclude taxes & fees</small>
+      </div>
+      <div class="room-book-col">
+        <form action="/booking/create" method="post" class="book-form">
           <input type="hidden" name="hotel_id" value="{{.HotelID}}" />
           <input type="hidden" name="room_id" value="{{.ID}}" />
-          <label>Malam</label>
+          <label>Nights</label>
           <input type="number" name="nights" min="1" value="1" />
-          <button class="btn btn-primary">Select Room</button>
+          <button class="btn btn-primary" type="submit">Choose</button>
         </form>
       </div>
     </article>
     {{end}}
+  </section>
+
+  <section id="location" class="card panel anchor-section info-section">
+    <h3>Location</h3>
+    <p>{{.Hotel.Address}}</p>
+    <iframe class="map" src="{{.Hotel.MapEmbedURL}}"></iframe>
+  </section>
+
+  <section id="facilities" class="card panel anchor-section info-section">
+    <h3>Facilities</h3>
+    <div class="chips">
+      {{range .Rooms}}{{range .Facilities}}<span>{{.}}</span>{{end}}{{end}}
+    </div>
+  </section>
+
+  <section id="policy" class="card panel anchor-section info-section">
+    <h3>Policy</h3>
+    <ul>
+      <li>Check-in mulai 14:00, Check-out sebelum 12:00.</li>
+      <li>Bawa kartu identitas saat check-in.</li>
+      <li>Kebijakan pembatalan mengikuti tipe kamar.</li>
+    </ul>
+  </section>
+
+  <section id="reviews" class="card panel anchor-section info-section">
+    <h3>Reviews</h3>
+    {{range .Hotel.Comments}}<p>• {{.}}</p>{{end}}
   </section>
 </section>
 {{end}}
