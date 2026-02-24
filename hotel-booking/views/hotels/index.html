@@ -1,0 +1,81 @@
+{{define "content"}}
+<section class="home-hero">
+  <div class="hero-cover">
+    <div class="hero-overlay">
+      <h1>Pilih Kota Dulu, Baru Pilih Hotel</h1>
+      <p>Beranda hanya menampilkan kota. Daftar hotel ada di halaman masing-masing kota.</p>
+    </div>
+  </div>
+</section>
+
+<form id="stickySearch" class="search-panel" method="get" action="/city-hotels">
+  <input type="hidden" id="cityInput" name="name" value="Balikpapan" />
+  <input type="hidden" id="checkinInput" value="03/03/2026" />
+  <input type="hidden" id="checkoutInput" value="04/03/2026" />
+  <input type="hidden" id="dateInput" name="date" value="03/03/2026 - 04/03/2026" />
+  <input type="hidden" id="guestInput" name="guest" value="2 Dewasa, 1 Kamar" />
+
+  <div class="search-item">
+    <label>Pilih Kota Hotel</label>
+    <button class="popup-trigger" data-popup="city" type="button" id="cityTrigger">Balikpapan</button>
+  </div>
+  <div class="search-item">
+    <label>Check-in</label>
+    <button class="popup-trigger date-trigger" data-popup="checkin" type="button" id="checkinTrigger"><span class="date-caption">Check-in</span><strong>03/03/2026</strong></button>
+  </div>
+  <div class="search-item">
+    <label>Check-out</label>
+    <button class="popup-trigger date-trigger" data-popup="checkout" type="button" id="checkoutTrigger"><span class="date-caption">Check-out</span><strong>04/03/2026</strong></button>
+  </div>
+  <div class="search-item">
+    <label>Tamu dan Kamar</label>
+    <button class="popup-trigger" data-popup="guest" type="button" id="guestTrigger">2 Dewasa, 1 Kamar</button>
+  </div>
+  <button class="btn btn-primary search-btn" type="submit">SEARCH</button>
+</form>
+
+<div id="searchPopup" class="search-popup-overlay">
+  <div class="search-popup-card">
+    <h3 id="popupTitle">Pilih Opsi</h3>
+    <div id="popupOptions" class="popup-options"></div>
+    <button type="button" class="btn" id="closePopupBtn">Tutup</button>
+  </div>
+</div>
+
+<section class="city-section">
+  <h2>20 Kota Indonesia Populer</h2>
+  <div class="city-grid">
+    {{range .CityCards}}
+    <a class="city-card" href="/city-hotels?name={{.Name}}" style="background-image:url('{{.ImageURL}}')"><div><h3>{{.Name}}</h3><p>10 Hotel di {{.Name}} mulai dari Rp {{.PriceFrom}}</p></div></a>
+    {{end}}
+  </div>
+</section>
+
+<section class="facts-section">
+  <h2>Fast facts</h2>
+  <p class="facts-sub">Info singkat yang perlu kamu tahu sebelum memilih hotel.</p>
+  <div class="facts-grid">
+    <article class="fact-card"><h4>🏨 Hotel brands to choose from</h4><strong>60+</strong></article>
+    <article class="fact-card"><h4>📍 Hotel destinations to explore</h4><strong>5,000+</strong></article>
+    <article class="fact-card"><h4>🛏️ Hotels available nationwide</h4><strong>3.2 million</strong></article>
+  </div>
+</section>
+
+<section class="faq-section">
+  <h2>FAQs</h2>
+  <details class="faq-item"><summary>Bagaimana sistem ranking hotel di StayNusa?</summary><p>Urutan hotel berdasarkan rating, ulasan tamu, popularitas, dan value harga.</p></details>
+  <details class="faq-item"><summary>Apakah saya booking langsung lewat StayNusa?</summary><p>Ya, proses booking dilakukan di platform kami dengan konfirmasi instan.</p></details>
+  <details class="faq-item"><summary>Bagaimana memastikan harga terbaik?</summary><p>Bandingkan tipe kamar, tanggal, dan promo aktif sebelum checkout.</p></details>
+  <details class="faq-item"><summary>Bagaimana StayNusa membantu perencanaan perjalanan?</summary><p>Kamu bisa pilih kota, filter hotel, lihat fasilitas kamar, lalu lanjut pembayaran.</p></details>
+  <details class="faq-item"><summary>Apakah booking last minute bisa lebih murah?</summary><p>Terkadang iya, terutama saat hotel memberi promo mendadak untuk kamar tersisa.</p></details>
+</section>
+
+<div id="hotelModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">✖</span>
+    <h3 id="mTitle"></h3>
+    <p id="mDesc"></p>
+    <p id="mCity"></p>
+  </div>
+</div>
+{{end}}

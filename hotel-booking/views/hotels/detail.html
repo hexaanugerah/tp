@@ -1,0 +1,15 @@
+{{define "content"}}
+<div class="detail card panel">
+  <h2>{{.Hotel.Name}}</h2>
+  <p>{{.Hotel.Description}}</p>
+  <p>{{.Hotel.Address}} • ⭐ {{.Hotel.Rating}}</p>
+  <div class="split">
+    <iframe class="map" src="{{.Hotel.MapEmbedURL}}"></iframe>
+    <div>
+      <h3>Komentar</h3>
+      {{range .Hotel.Comments}}<p>- {{.}}</p>{{end}}
+      <a class="btn btn-primary" href="/rooms?hotel_id={{.Hotel.ID}}">Pilih Tipe Kamar</a>
+    </div>
+  </div>
+</div>
+{{end}}
