@@ -1,25 +1,66 @@
 {{define "content"}}
-<section class="city-hotels-head card panel">
-  <h2>Daftar Hotel di {{.City}}</h2>
-  <p>Masing-masing kota berisi 10 hotel. Pilih hotel untuk lihat detail dan tipe kamar.</p>
-  <a class="btn" href="/">← Kembali ke Beranda</a>
-</section>
-
-<section id="list-hotel" class="grid hotels-grid">
-{{range .Hotels}}
-<article class="card hotel-card hover-up" onclick="openHotelModal('{{.Name}}','{{.Description}}','{{.City}}')">
-  <img src="{{.Image}}" alt="{{.Name}}" />
-  <div class="card-body">
-    <h3>{{.Name}}</h3>
-    <p>{{.City}} • ⭐ {{.Rating}}</p>
-    <p class="price">Dari Rp {{.PriceStart}} / malam</p>
-    <div class="btn-row">
-      <a class="btn" href="/hotel?id={{.ID}}">Lihat Detail</a>
-      <a class="btn btn-primary" href="/rooms?hotel_id={{.ID}}">Pilih Tipe Kamar</a>
+<section class="results-shell">
+  <div class="results-topbar card panel">
+    <div>
+      <p class="crumb">Home / Indonesia / {{.City}}</p>
+      <h2>{{.City}}: {{len .Hotels}} hotel pilihan</h2>
     </div>
+    <a class="btn" href="/">← Kembali ke Beranda</a>
   </div>
-</article>
-{{end}}
+
+  <section class="sort-tabs" aria-label="sorting tabs">
+    <button class="tab-btn active" type="button">Recommended</button>
+    <button class="tab-btn" type="button">Top reviews</button>
+    <button class="tab-btn" type="button">Lowest price</button>
+    <button class="tab-btn" type="button">Most stars</button>
+    <button class="tab-btn" type="button">Nearest first</button>
+  </section>
+
+  <div class="search-insight">Kami membandingkan harga dari berbagai partner untuk bantu kamu dapat harga terbaik.</div>
+
+  <div class="results-layout">
+    <aside class="filters-panel card">
+      <h3>Filter by</h3>
+      <p class="filters-sub">Popular filters</p>
+      <label><input type="checkbox" /> Sarapan</label>
+      <label><input type="checkbox" /> Free WiFi</label>
+      <label><input type="checkbox" /> Kolam renang</label>
+      <label><input type="checkbox" /> Bintang 4+</label>
+      <label><input type="checkbox" /> Dekat pusat kota</label>
+    </aside>
+
+    <section id="list-hotel" class="hotel-results-list">
+      {{range .Hotels}}
+      <article class="result-card" onclick="openHotelModal('{{.Name}}','{{.Description}}','{{.City}}')">
+        <div class="result-media">
+          <img src="{{.Image}}" alt="{{.Name}}" />
+        </div>
+        <div class="result-main">
+          <h3>{{.Name}}</h3>
+          <p class="meta">⭐ {{.Rating}} · {{.City}}</p>
+          <p class="desc">{{.Description}}</p>
+          <div class="tag-row">
+            <span>Free cancellation</span>
+            <span>Pay at hotel</span>
+            <span>Breakfast option</span>
+          </div>
+          <div class="partner-row">
+            <span>Booking.com</span>
+            <span>Agoda</span>
+            <span>Traveloka</span>
+          </div>
+        </div>
+        <div class="result-price">
+          <p class="cheapest">Harga terbaik mulai</p>
+          <strong>Rp {{.PriceStart}}</strong>
+          <small>/ malam</small>
+          <a class="btn" href="/hotel?id={{.ID}}">Lihat Detail</a>
+          <a class="btn btn-primary" href="/rooms?hotel_id={{.ID}}">Pilih Kamar</a>
+        </div>
+      </article>
+      {{end}}
+    </section>
+  </div>
 </section>
 
 <div id="hotelModal" class="modal">

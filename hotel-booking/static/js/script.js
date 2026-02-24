@@ -90,7 +90,7 @@ window.onclick = (e) => {
   const datasets = {
     city: {
       title: "Pilih Kota Hotel",
-      values: ["Balikpapan", "Jakarta", "Bandung", "Yogyakarta", "Surabaya", "Makassar", "Bali", "Medan"],
+      values: ["📍 Near me", "Balikpapan", "Jakarta", "Bandung", "Yogyakarta", "Surabaya", "Makassar", "Bali", "Medan"],
       apply: (v) => {
         cityInput.value = v;
         cityTrigger.textContent = v;
@@ -126,6 +126,7 @@ window.onclick = (e) => {
     data.values.forEach((v) => {
       const btn = document.createElement("button");
       btn.type = "button";
+      btn.className = "popup-option";
       btn.textContent = v;
       btn.addEventListener("click", () => {
         data.apply(v);
