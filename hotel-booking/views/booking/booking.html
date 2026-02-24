@@ -1,24 +1,57 @@
 {{define "content"}}
-<h2>Pemilihan Kamar - {{.Hotel.Name}}</h2>
-<div class="type-tabs">
-  <a class="tab" href="/rooms?hotel_id={{.Hotel.ID}}&type=Biasa">Biasa</a>
-  <a class="tab" href="/rooms?hotel_id={{.Hotel.ID}}&type=Deluxe">Deluxe</a>
-  <a class="tab" href="/rooms?hotel_id={{.Hotel.ID}}&type=VIP">VIP</a>
-</div>
-<div class="grid">
-{{range .Rooms}}
-<div class="card room-card">
-  <h3>{{.Name}}</h3>
-  <p>Tipe: {{.Type}} | Kapasitas: {{.Capacity}} orang | Kasur: {{.Beds}}</p>
-  <p>Fasilitas: {{range .Facilities}}<span class="pill">{{.}}</span>{{end}}</p>
-  <iframe class="floor-map" src="{{.FloorPlanURL}}"></iframe>
-  <form action="/booking/create" method="post">
-    <input type="hidden" name="hotel_id" value="{{.HotelID}}" />
-    <input type="hidden" name="room_id" value="{{.ID}}" />
-    <input type="number" name="nights" min="1" value="1" />
-    <button class="btn btn-primary">Booking Sekarang</button>
-  </form>
-</div>
-{{end}}
-</div>
+<section class="rooms-page">
+  <div class="rooms-sticky-nav">
+    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Overview</a>
+    <a class="rooms-nav-link active" href="#">Rooms</a>
+    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Location</a>
+    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Facilities</a>
+    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Policy</a>
+    <a class="rooms-nav-link" href="/hotel?id={{.Hotel.ID}}">Reviews</a>
+  </div>
+
+  <div class="rooms-hero card panel">
+    <div>
+      <h2>Available Room Types in {{.Hotel.Name}}</h2>
+      <p>Pilih tipe kamar terbaik sesuai kebutuhan perjalananmu.</p>
+    </div>
+    <a class="btn" href="/hotel?id={{.Hotel.ID}}">← Kembali ke Detail Hotel</a>
+  </div>
+
+  <div class="room-type-pills">
+    <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Biasa">Biasa</a>
+    <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=Deluxe">Deluxe</a>
+    <a class="type-pill" href="/rooms?hotel_id={{.Hotel.ID}}&type=VIP">VIP</a>
+    <span class="type-hint">Filter aktif: {{.Type}}</span>
+  </div>
+
+  <div class="rooms-banner">💡 Ketemu harga lebih hemat? Klaim selisihnya dengan Best Price Guarantee.</div>
+
+  <section class="rooms-list-modern">
+    {{range .Rooms}}
+    <article class="room-modern-card">
+      <div class="room-modern-media">
+        <iframe class="floor-map" src="{{.FloorPlanURL}}"></iframe>
+      </div>
+      <div class="room-modern-info">
+        <h3>{{.Name}}</h3>
+        <p class="room-meta">{{.Type}} · {{.Capacity}} tamu · {{.Beds}} kasur</p>
+        <div class="tag-row">
+          {{range .Facilities}}<span>{{.}}</span>{{end}}
+        </div>
+      </div>
+      <div class="room-modern-price">
+        <small>Price/room/night starts from</small>
+        <strong>Rp {{.PricePerNight}}</strong>
+        <form action="/booking/create" method="post" class="room-book-form">
+          <input type="hidden" name="hotel_id" value="{{.HotelID}}" />
+          <input type="hidden" name="room_id" value="{{.ID}}" />
+          <label>Malam</label>
+          <input type="number" name="nights" min="1" value="1" />
+          <button class="btn btn-primary">Select Room</button>
+        </form>
+      </div>
+    </article>
+    {{end}}
+  </section>
+</section>
 {{end}}

@@ -161,3 +161,29 @@ body.navbar-visible .search-panel.nav-pinned{top:66px}
 .cal-day.selected{background:#0a66d9;color:#fff}
 .popup-foot{display:flex;justify-content:flex-end;margin-top:.25rem}
 .popup-foot button{border:none;background:transparent;color:#0f172a;text-decoration:underline;cursor:pointer;padding:0}
+
+.rooms-page{margin-top:.6rem}
+.rooms-sticky-nav{position:sticky;top:72px;z-index:25;display:flex;gap:1.1rem;flex-wrap:wrap;background:#fff;border:1px solid #d8e2ef;border-radius:12px;padding:.75rem 1rem;margin-bottom:.9rem}
+.rooms-nav-link{text-decoration:none;color:#475569;font-weight:700}
+.rooms-nav-link.active{color:#0a66d9;border-bottom:3px solid #0a66d9;padding-bottom:.2rem}
+.rooms-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.85rem}
+.rooms-hero h2{margin:.1rem 0 .3rem 0;font-size:2rem}
+.rooms-hero p{margin:0;color:#64748b}
+.room-type-pills{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.75rem}
+.type-pill{background:#e6f0ff;color:#0a4fb8;text-decoration:none;font-weight:700;padding:.46rem .9rem;border-radius:999px;border:1px solid #bfd6ff}
+.type-hint{color:#475569;font-weight:600}
+.rooms-banner{background:#1572bc;color:#fff;padding:.85rem 1rem;border-radius:12px;font-weight:700;margin-bottom:.9rem}
+.rooms-list-modern{display:grid;gap:1rem}
+.room-modern-card{display:grid;grid-template-columns:340px 1fr 260px;background:#fff;border:1px solid #d8e3f0;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px #dbe6f466}
+.room-modern-media{background:#edf4ff;padding:.85rem}
+.room-modern-info{padding:1rem}
+.room-modern-info h3{margin:.1rem 0 .35rem 0;font-size:2rem}
+.room-meta{margin:0 0 .7rem 0;color:#475569}
+.room-modern-price{border-left:1px solid #e2e8f0;padding:1rem;display:flex;flex-direction:column;gap:.45rem}
+.room-modern-price small{color:#64748b}
+.room-modern-price strong{font-size:1.85rem;color:#0a66d9}
+.room-book-form{display:grid;gap:.4rem;margin-top:.3rem}
+.room-book-form label{font-size:.85rem;font-weight:700;color:#475569}
+.room-book-form input{padding:.5rem .6rem;border:1px solid #cbd5e1;border-radius:8px}
+
+@media (max-width:1080px){.room-modern-card{grid-template-columns:1fr}.room-modern-price{border-left:none;border-top:1px solid #e2e8f0}.rooms-sticky-nav{top:64px}}
