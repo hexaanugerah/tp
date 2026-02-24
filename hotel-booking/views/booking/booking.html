@@ -99,7 +99,8 @@
     <iframe class="map" src="{{.Hotel.MapEmbedURL}}"></iframe>
   </section>
 
-  <section id="facilities" class="card panel anchor-section info-section section-gap">
+  <div class="section-separator"><span>Facilities</span></div>
+  <section id="facilities" class="card panel anchor-section info-section section-gap themed-section themed-facilities">
     <h3>All facilities in {{.Hotel.Name}}</h3>
     <div class="facility-photo-row">
       <figure><img src="https://picsum.photos/seed/fac-1/420/260" alt="Bar" /><figcaption>Bar, Cafe and Lounge</figcaption></figure>
@@ -124,7 +125,8 @@
     </div>
   </section>
 
-  <section id="policy" class="card panel anchor-section info-section section-gap">
+  <div class="section-separator"><span>Policy</span></div>
+  <section id="policy" class="card panel anchor-section info-section section-gap themed-section themed-policy">
     <div class="policy-layout">
       <aside class="policy-title">Accommodation Policy & General Information in {{.Hotel.Name}}</aside>
       <div class="policy-main">
@@ -153,7 +155,8 @@
     </div>
   </section>
 
-  <section id="reviews" class="card panel anchor-section info-section section-gap">
+  <div class="section-separator"><span>Reviews</span></div>
+  <section id="reviews" class="card panel anchor-section info-section section-gap themed-section themed-reviews">
     <h3>More Reviews from Other Guests in {{.Hotel.Name}}</h3>
     <p class="review-sub">Most Recent Photos by Guests in {{.Hotel.Name}}</p>
     <div class="review-photos">

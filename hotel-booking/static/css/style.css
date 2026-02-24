@@ -291,3 +291,14 @@ body.navbar-visible .search-panel.nav-pinned{top:66px}
 .review-reply{background:#f4f7fb;border:1px solid #dde6f3;border-radius:10px;padding:.75rem}
 
 @media (max-width:1200px){.facility-photo-row{grid-template-columns:repeat(3,minmax(0,1fr))}.facility-columns,.faq-policy,.policy-layout,.review-score-wrap{grid-template-columns:1fr}.review-photos{grid-template-columns:repeat(2,minmax(0,1fr))}.policy-table div,.score-bars div{grid-template-columns:1fr}}
+
+.section-separator{display:flex;align-items:center;gap:.75rem;margin:.4rem 0 -.2rem 0}
+.section-separator::before,.section-separator::after{content:"";height:1px;background:#cfdceb;flex:1}
+.section-separator span{background:#eaf3ff;color:#0a66d9;border:1px solid #bed4f5;border-radius:999px;padding:.32rem .8rem;font-weight:800;font-size:.86rem;letter-spacing:.2px}
+.themed-section{padding:1.2rem 1.2rem 1.25rem;border-width:1px 1px 1px 1px}
+.themed-facilities{background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);border-color:#d6e4f5}
+.themed-policy{background:linear-gradient(180deg,#ffffff 0%,#f7fbff 100%);border-color:#d6e9f8}
+.themed-reviews{background:linear-gradient(180deg,#ffffff 0%,#f8fcff 100%);border-color:#d5e7f7}
+#facilities.section-gap,#policy.section-gap,#reviews.section-gap{margin-top:1.5rem}
+
+@media (max-width:1200px){.section-separator{margin-top:.8rem}}
